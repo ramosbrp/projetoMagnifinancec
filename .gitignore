@@ -5,6 +5,7 @@ obj/
 *.suo
 *.userprefs
 
+
 ## Angular/Node
 /node_modules
 /dist
@@ -23,3 +24,6 @@ obj/
 ## OS
 .DS_Store
 Thumbs.db
+
+# NuGet
+packages/
