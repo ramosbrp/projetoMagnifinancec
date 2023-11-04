@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MyUniversityAPI.App_Start;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -6,6 +7,7 @@ using System.Web.Mvc;
 
 namespace MyUniversityAPI.Controllers
 {
+    [AllowCors]
     public class HomeController : Controller
     {
         public ActionResult Index()
@@ -26,5 +28,13 @@ namespace MyUniversityAPI.Controllers
 
             return View();
         }
+
+        [HttpGet]
+        public ActionResult Teste()
+        {
+            return Json("Testando", JsonRequestBehavior.AllowGet);
+        }
+
+
     }
 }
