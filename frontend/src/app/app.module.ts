@@ -22,6 +22,6 @@ import { HomeComponent } from './components/home-component';
   providers: [
     MyService
   ],
-  bootstrap: [HomeComponent]
+  bootstrap: [AppComponent]
 })
 export class AppModule { }
