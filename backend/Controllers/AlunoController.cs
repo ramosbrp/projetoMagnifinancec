@@ -1,35 +1,56 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using MyUniversityAPI.Data;
 using MyUniversityAPI.Models;
 
 
 namespace MyUniversityAPI.Controllers
 {
     public class AlunoController : Controller
-
     {
+        private readonly ApplicationDbContext dbContext = new ApplicationDbContext();
         // GET api/student
         public IEnumerable<Aluno> Get()
         {
-            // Aqui você vai buscar todos os estudantes, por exemplo
+            
             return new List<Aluno>();
         }
 
         // GET api/student/5
-        public Aluno Get(int id)
+        public ActionResult Details(int? id)
         {
-            // Aqui você vai buscar um estudante pelo ID
-            return new Aluno();
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+
+            Aluno aluno = dbContext.Alunos.Find(id);
+            if (aluno == null)
+            {
+                return HttpNotFound();
+            }
+
+            return View(aluno);
         }
 
-        // POST api/student
-        public void Post( Aluno aluno)
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Create([Bind(Include = "Id,Nome,DataNascimento,NumeroMatricula")] Aluno aluno)
         {
-            // Aqui você vai criar um novo estudante
+            if (ModelState.IsValid)
+            {
+                dbContext.Alunos.Add(aluno);
+                dbContext.SaveChanges();
+                return RedirectToAction("Index");
+            }
+
+            return View(aluno);
         }
+
 
         // PUT api/student/5
         public void Put(int id,  Aluno aluno)
