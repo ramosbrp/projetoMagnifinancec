@@ -1,6 +1,10 @@
-<div>
-
-  Root
+<div class="dashboard">
+  <h1>Bem-vindo ao Sistema de Gestão Universitária</h1>
+  <div class="navigation">
+    <button routerLink="/alunos" class="btn btn-blue">Alunos</button>
+    <button routerLink="/professores" class="btn btn-green">Professores</button>
+    <button routerLink="/matriculas" class="btn btn-red">Matrículas</button>
+  </div>
+  <!-- O local onde o conteúdo do roteamento filho será exibido -->
+  <router-outlet></router-outlet>
 </div>
-
-<router-outlet></router-outlet>
