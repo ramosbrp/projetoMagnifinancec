@@ -1,38 +1,67 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using MyUniversityAPI.Data;
 using MyUniversityAPI.Models;
-
+using System.Data.Entity;
+using MyUniversityAPI.App_Start;
 
 namespace MyUniversityAPI.Controllers
 {
     public class AlunoController : Controller
-
     {
-        // GET api/student
-        public IEnumerable<Aluno> Get()
+        private readonly ApplicationDbContext dbContext = new ApplicationDbContext();
+
+
+
+        [HttpGet]
+        public ActionResult Index()
+
         {
-            // Aqui você vai buscar todos os estudantes, por exemplo
-            return new List<Aluno>();
+            // Inclui as Matriculas relacionadas com cada Aluno
+            //var alunosComMatriculas = dbContext.Alunos.Include(a => a.Matriculas).ToList();
+
+            var alunosComMatriculas = "ok";
+
+            // Retorna a lista como JSON
+            return Json(alunosComMatriculas, JsonRequestBehavior.AllowGet);
         }
 
         // GET api/student/5
-        public Aluno Get(int id)
+        public ActionResult Details(int? id)
         {
-            // Aqui você vai buscar um estudante pelo ID
-            return new Aluno();
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+
+            Aluno aluno = dbContext.Alunos.Find(id);
+            if (aluno == null)
+            {
+                return HttpNotFound();
+            }
+
+            return View(aluno);
         }
 
-        // POST api/student
-        public void Post( Aluno aluno)
+        [HttpPost]
+        public Aluno Create([Bind(Include = "Id,Nome,DataNascimento,NumeroMatricula")] Aluno aluno)
         {
-            // Aqui você vai criar um novo estudante
+            if (ModelState.IsValid)
+            {
+                dbContext.Alunos.Add(aluno);
+                dbContext.SaveChanges();
+            }
+
+            return aluno;
         }
+
 
         // PUT api/student/5
-        public void Put(int id,  Aluno aluno)
+        public void Put(int id, Aluno aluno)
         {
             // Aqui você vai atualizar um estudante pelo ID
         }
@@ -41,6 +70,15 @@ namespace MyUniversityAPI.Controllers
         public void Delete(int id)
         {
             // Aqui você vai deletar um estudante pelo ID
+        }
+
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing)
+            {
+                dbContext.Dispose();
+            }
+            base.Dispose(disposing);
         }
     }
 }

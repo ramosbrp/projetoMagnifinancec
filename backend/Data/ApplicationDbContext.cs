@@ -12,5 +12,6 @@ namespace MyUniversityAPI.Data
         public ApplicationDbContext() : base("DefaultConnection") { }
 
         public DbSet <Aluno> Alunos { get; set; }
+        public DbSet <Matricula> Matriculas { get; set; }
     }
 }
