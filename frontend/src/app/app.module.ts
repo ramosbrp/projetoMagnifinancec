@@ -5,14 +5,14 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 
 import { HttpClientModule } from '@angular/common/http';
-import { MyService } from './services/service';
 
-import { HomeComponent } from './components/home-component';
+import { AlunoComponent } from './components/aluno/aluno.component';
+import { AlunoService } from './services/aluno.service';
 
 @NgModule({
   declarations: [
     AppComponent,
-    HomeComponent
+    AlunoComponent
   ],
   imports: [
     BrowserModule,
@@ -20,7 +20,7 @@ import { HomeComponent } from './components/home-component';
     HttpClientModule
   ],
   providers: [
-    MyService
+    AlunoService
   ],
   bootstrap: [AppComponent]
 })

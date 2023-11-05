@@ -6,18 +6,28 @@ using System.Web;
 using System.Web.Mvc;
 using MyUniversityAPI.Data;
 using MyUniversityAPI.Models;
-
+using System.Data.Entity;
+using MyUniversityAPI.App_Start;
 
 namespace MyUniversityAPI.Controllers
 {
     public class AlunoController : Controller
     {
         private readonly ApplicationDbContext dbContext = new ApplicationDbContext();
-        // GET api/student
-        public IEnumerable<Aluno> Get()
+
+
+
+        [HttpGet]
+        public ActionResult Index()
+
         {
-            
-            return new List<Aluno>();
+            // Inclui as Matriculas relacionadas com cada Aluno
+            //var alunosComMatriculas = dbContext.Alunos.Include(a => a.Matriculas).ToList();
+
+            var alunosComMatriculas = "ok";
+
+            // Retorna a lista como JSON
+            return Json(alunosComMatriculas, JsonRequestBehavior.AllowGet);
         }
 
         // GET api/student/5
@@ -38,22 +48,20 @@ namespace MyUniversityAPI.Controllers
         }
 
         [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,Nome,DataNascimento,NumeroMatricula")] Aluno aluno)
+        public Aluno Create([Bind(Include = "Id,Nome,DataNascimento,NumeroMatricula")] Aluno aluno)
         {
             if (ModelState.IsValid)
             {
                 dbContext.Alunos.Add(aluno);
                 dbContext.SaveChanges();
-                return RedirectToAction("Index");
             }
 
-            return View(aluno);
+            return aluno;
         }
 
 
         // PUT api/student/5
-        public void Put(int id,  Aluno aluno)
+        public void Put(int id, Aluno aluno)
         {
             // Aqui você vai atualizar um estudante pelo ID
         }
@@ -62,6 +70,15 @@ namespace MyUniversityAPI.Controllers
         public void Delete(int id)
         {
             // Aqui você vai deletar um estudante pelo ID
+        }
+
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing)
+            {
+                dbContext.Dispose();
+            }
+            base.Dispose(disposing);
         }
     }
 }
