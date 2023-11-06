@@ -3,12 +3,13 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
 import { catchError, retry } from 'rxjs/operators';
 import { Aluno } from '../models/aluno.model'; // Caminho do modelo Aluno
+import { environment } from 'src/environment/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AlunoService {
-  private apiUrl = 'https://localhost:44395/aluno';
+  private apiUrl = `${environment.apiUrl}/aluno`;
 
   httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })
