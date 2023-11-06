@@ -4,8 +4,8 @@ import { Aluno } from 'src/app/models/aluno.model';
 
 @Component({
     selector: 'app-aluno',
-    templateUrl: './aluno.component.html',
-    styleUrls: ['./aluno.component.css']
+    templateUrl: './aluno-list.component.html',
+    styleUrls: ['./aluno-list.component.css']
 })
 
 export class AlunoComponent implements OnInit{

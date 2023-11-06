@@ -11,23 +11,20 @@ using MyUniversityAPI.App_Start;
 
 namespace MyUniversityAPI.Controllers
 {
-    public class AlunoController : Controller
+    public class CursoController : Controller
     {
         private readonly ApplicationDbContext dbContext = new ApplicationDbContext();
-
-
 
         [HttpGet]
         public ActionResult Index()
         {
-            //Inclui as Matriculas relacionadas com cada Aluno
-            var alunosComMatriculas = dbContext.Alunos.Include(a => a.Matriculas).ToList();
+            //Inclui as Disciplinas relacionadas com cada Curso
+            var cursos = dbContext.Cursos.Include(a => a.Disciplinas).ToList();
 
             // Retorna a lista como JSON
-            return Json(alunosComMatriculas, JsonRequestBehavior.AllowGet);
+            return Json(cursos, JsonRequestBehavior.AllowGet);
         }
 
-        // GET api/student/5
         public ActionResult Details(int? id)
         {
             if (id == null)
@@ -35,39 +32,29 @@ namespace MyUniversityAPI.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
 
-            Aluno aluno = dbContext.Alunos.Find(id);
-            if (aluno == null)
+            Curso curso = dbContext.Cursos.Find(id);
+            if (curso == null)
             {
                 return HttpNotFound();
             }
 
-            return View(aluno);
+            return View(curso);
         }
 
         [HttpPost]
-        public Aluno Create(Aluno aluno)
+        public Curso Create(Curso curso)
         {
             if (ModelState.IsValid)
             {
-                dbContext.Alunos.Add(aluno);
+                dbContext.Cursos.Add(curso);
                 dbContext.SaveChanges();
             }
 
-            return aluno;
+
+            return curso;
         }
 
 
-        // PUT api/student/5
-        public void Put(int id, Aluno aluno)
-        {
-            // Aqui você vai atualizar um estudante pelo ID
-        }
-
-        // DELETE api/student/5
-        public void Delete(int id)
-        {
-            // Aqui você vai deletar um estudante pelo ID
-        }
 
         protected override void Dispose(bool disposing)
         {

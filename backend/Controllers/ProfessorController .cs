@@ -11,23 +11,20 @@ using MyUniversityAPI.App_Start;
 
 namespace MyUniversityAPI.Controllers
 {
-    public class AlunoController : Controller
+    public class ProfessorController : Controller
     {
         private readonly ApplicationDbContext dbContext = new ApplicationDbContext();
-
-
 
         [HttpGet]
         public ActionResult Index()
         {
-            //Inclui as Matriculas relacionadas com cada Aluno
-            var alunosComMatriculas = dbContext.Alunos.Include(a => a.Matriculas).ToList();
+            //Inclui as Matriculas relacionadas com cada Professor
+            var professores = dbContext.Professors.Include(a => a.Disciplinas).ToList();
 
             // Retorna a lista como JSON
-            return Json(alunosComMatriculas, JsonRequestBehavior.AllowGet);
+            return Json(professores, JsonRequestBehavior.AllowGet);
         }
 
-        // GET api/student/5
         public ActionResult Details(int? id)
         {
             if (id == null)
@@ -35,25 +32,26 @@ namespace MyUniversityAPI.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
 
-            Aluno aluno = dbContext.Alunos.Find(id);
-            if (aluno == null)
+            Professor professores = dbContext.Professors.Find(id);
+            if (professores == null)
             {
                 return HttpNotFound();
             }
 
-            return View(aluno);
+            return View(professores);
         }
 
         [HttpPost]
-        public Aluno Create(Aluno aluno)
+        public Professor Create(Professor professor)
         {
             if (ModelState.IsValid)
             {
-                dbContext.Alunos.Add(aluno);
+                dbContext.Professors.Add(professor);
                 dbContext.SaveChanges();
             }
 
-            return aluno;
+
+            return professor;
         }
 
 

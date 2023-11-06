@@ -1,31 +1,82 @@
-.dashboard {
-    text-align: center;
-    color: #333;
-  }
-  
-  .navigation {
-    margin: 20px 0;
-  }
-  
-  .btn {
-    padding: 10px 20px;
-    margin: 0 10px;
-    border: none;
-    color: white;
-    cursor: pointer;
-  }
-  
-  .btn-blue {
-    background-color: #007bff;
-  }
-  
-  .btn-green {
-    background-color: #28a745;
-  }
-  
-  .btn-red {
-    background-color: #dc3545;
-  }
-  
-  /* Adicione responsividade ou estilos adicionais conforme necessário */
-  
+/* app.component.css */
+.dashboard-container {
+  display: flex;
+}
+
+.sidebar {
+  width: 250px;
+  background-color: #f8f9fa;
+  height: 100vh;
+  padding-top: 20px;
+  box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+}
+
+.menu-item {
+  margin-bottom: 10px;
+  padding: 0 10px;
+}
+
+.menu-button {
+  width: 100%;
+  padding: 10px;
+  cursor: pointer;
+  border: none;
+  border-radius: 20px;
+  background: none;
+  text-align: left;
+  color: white;
+  transition: background-color 0.3s;
+  outline: none;
+}
+
+.btn-blue { background-color: #007bff; }
+.btn-orange { background-color: #fd7e14; }
+.btn-green { background-color: #28a745; }
+.btn-red { background-color: #dc3545; }
+/* Efeitos de hover */
+.btn-blue:hover, .btn-orange:hover, .btn-green:hover, .btn-red:hover {
+  filter: brightness(85%);
+}
+
+.submenu {
+  display: none;
+  padding-left: 20px;
+}
+
+.submenu-item {
+  display: block;
+  margin: 5px 0;
+  color: #333;
+  text-decoration: none;
+  border-radius: 10px;
+  padding: 5px 10px;
+  transition: background-color 0.3s, transform 0.3s;
+}
+
+.submenu-item:hover {
+  background-color: #e9ecef;
+  text-decoration: none;
+  transform: translateX(5px);
+}
+
+.collapsed {
+  display: block;
+}
+
+.content-area {
+  flex-grow: 1;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* Centraliza horizontalmente */
+}
+
+.dashboard-title {
+  margin-bottom: 20px;
+  font-size: 2.5em; /* Tamanho maior para o título */
+  color: #007bff; /* Cor que combina com o tema */
+  text-align: center; /* Centraliza o texto do título */
+  font-weight: bold; /* Torna o texto do título em negrito */
+  margin-top: 20px;
+  width: 100%;
+}
