@@ -8,6 +8,7 @@ using MyUniversityAPI.Data;
 using MyUniversityAPI.Models;
 using System.Data.Entity;
 using MyUniversityAPI.App_Start;
+using System.Threading.Tasks;
 
 namespace MyUniversityAPI.Controllers
 {
@@ -45,12 +46,14 @@ namespace MyUniversityAPI.Controllers
         }
 
         [HttpPost]
-        public Aluno Create(Aluno aluno)
+        public async Task<Aluno> Create(Aluno aluno)
         {
             if (ModelState.IsValid)
             {
+                aluno.NumeroMatricula = GerarNumeroMatricula();
+
                 dbContext.Alunos.Add(aluno);
-                dbContext.SaveChanges();
+                await dbContext.SaveChangesAsync();
             }
 
             return aluno;
@@ -67,6 +70,11 @@ namespace MyUniversityAPI.Controllers
         public void Delete(int id)
         {
             // Aqui você vai deletar um estudante pelo ID
+        }
+
+        private string GerarNumeroMatricula()
+        {
+            return DateTime.Now.ToString("yyyyMMddHHmmss");
         }
 
         protected override void Dispose(bool disposing)
