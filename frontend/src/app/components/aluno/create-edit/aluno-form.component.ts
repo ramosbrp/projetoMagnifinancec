@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { CursoService } from '../../../services/curso.service';
 import { Aluno } from '../../../models/aluno.model';
 import { AlunoService } from 'src/app/services/aluno.service';
@@ -7,56 +7,45 @@ import { FormArray, FormBuilder, FormGroup, } from '@angular/forms';
 @Component({
   selector: 'app-aluno-form',
   templateUrl: './aluno-form.component.html',
-  styleUrls: ['./aluno-form.component.css']
+  styleUrls: ['./aluno-form.component.css', '../../../../styles.scss']
 })
-export class AlunoFormComponent implements OnInit {
+export class AlunoFormComponent  {
     [x: string]: any;
-    cursoForm: FormGroup;
-    professores: any[] = []; // Substitua 'any' pelo tipo correto se tiver um modelo para professores
+    alunoForm: FormGroup;
+    alunos: any[] = []; 
+    alunoCadastrado: Aluno | null = null;
   
     constructor(
       private fb: FormBuilder,
-      private cursoService: CursoService,
       private alunoService: AlunoService
     ) {
-      this.cursoForm = this.fb.group({
+      this.alunoForm = this.fb.group({
         nome: '',
         disciplinas: this.fb.array([])
       });
     }
   
-    ngOnInit(): void {
-      this.alunoService.getProfessores().subscribe(
-        professoresData => {
-          this.professores = professoresData; // Assumindo que retorna um array de professores
-        }
-      );
-    }
+    
   
     get disciplinas(): FormArray {
-      return this.cursoForm.get('disciplinas') as FormArray;
+      return this.alunoForm.get('disciplinas') as FormArray;
     }
   
-    novaDisciplina(): FormGroup {
-      return this.fb.group({
-        nome: '',
-        professorId: '' // Você pode armazenar o ID do professor aqui
-      });
-    }
-  
-    adicionarDisciplina(): void {
-      this.disciplinas.push(this.novaDisciplina());
-    }
-  
-    removerDisciplina(index: number): void {
-      this.disciplinas.removeAt(index);
-    }
+    
   
     onSubmit(): void {
-      if (this.cursoForm.valid) {
-        this.cursoService.createCurso(this.cursoForm.value).subscribe(
-          // Trate a resposta aqui
-        );
+      if (this.alunoForm.valid) {
+        this.alunoService.createAluno(this.alunoForm.value).subscribe({
+          next: (aluno: Aluno) => {
+            this.alunoCadastrado = aluno; // Armazena o aluno retornado pelo servidor
+            // Se desejar, aqui você pode redirecionar o usuário para outra página
+            // ou limpar o formulário para nova entrada
+          },
+          error: (erro) => {
+            console.error('Erro ao cadastrar o aluno:', erro);
+            // Trate o erro conforme necessário
+          }
+      });
       }
     }
   }

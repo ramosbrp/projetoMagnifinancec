@@ -17,6 +17,7 @@ export class AlunoService {
 
   constructor(private http: HttpClient) {}
 
+  //Get
   getAlunos(): Observable<Aluno[]> {
     console.log('ok')
     return this.http.get<Aluno[]>(this.apiUrl, this.httpOptions)
@@ -26,7 +27,13 @@ export class AlunoService {
         );
   }
 
-  // Adicione outros métodos CRUD aqui conforme necessário
+  //Create
+  createAluno(aluno: Aluno): Observable<Aluno> {
+    return this.http.post<Aluno>(`${this.apiUrl}/create`, aluno, this.httpOptions)
+      .pipe(
+        catchError(this.handleError)
+      );
+  }
 
   // Método para tratar erros
   private handleError(error: any) {

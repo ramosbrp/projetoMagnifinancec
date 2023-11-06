@@ -3,6 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { AlunoComponent } from './components/aluno/list/aluno-list.component';
 import { CursoFormComponent } from './components/curso/create-edit/curso-form.component';
 import { CursoListComponent } from './components/curso/list/curso-list.component';
+import { AlunoFormComponent } from './components/aluno/create-edit/aluno-form.component';
 
 const routes: Routes = [
   {path: 'cursos', component: CursoListComponent},
@@ -12,7 +13,7 @@ const routes: Routes = [
   {path: 'professores/novo"', component: CursoFormComponent},
 
   {path: 'alunos', component: AlunoComponent},
-  {path: 'alunos/novo', component: AlunoComponent},
+  {path: 'alunos/novo', component: AlunoFormComponent},
 
   {path: 'matriculas', component: AlunoComponent},
   {path: 'matriculas/nova', component: AlunoComponent},

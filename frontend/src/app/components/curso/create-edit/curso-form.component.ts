@@ -8,7 +8,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 @Component({
   selector: 'app-curso-form',
   templateUrl: './curso-form.component.html',
-  styleUrls: ['./curso-form.component.css']
+  styleUrls: ['./curso-form.component.css', '../../../../styles.scss']
 })
 export class CursoFormComponent implements OnInit {
     cursoForm: FormGroup;
