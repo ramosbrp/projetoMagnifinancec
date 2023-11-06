@@ -1,7 +1,0 @@
-{
-    "/alunos": {
-      "target": "https://localhost:44395/alunos",
-      "secure": false,
-      "changeOrigin": true
-    }
-  }
