@@ -1,10 +1,42 @@
-<div class="dashboard">
-  <h1>Bem-vindo ao Sistema de Gestão Universitária</h1>
-  <div class="navigation">
-    <button routerLink="/alunos" class="btn btn-blue">Alunos</button>
-    <button routerLink="/professores" class="btn btn-green">Professores</button>
-    <button routerLink="/matriculas" class="btn btn-red">Matrículas</button>
-  </div>
-  <!-- O local onde o conteúdo do roteamento filho será exibido -->
-  <router-outlet></router-outlet>
+<!-- app.component.html -->
+<div class="dashboard-container">
+  <aside class="sidebar">
+    <!-- Cursos -->
+    <div class="menu-item">
+      <button class="menu-button btn-blue" (click)="toggleCollapse('curso')">Cursos</button>
+      <div class="submenu" [class.collapsed]="collapsed['curso']">
+        <a routerLink="/cursos" routerLinkActive="active-link" class="submenu-item">Listar Cursos</a>
+        <a routerLink="/cursos/novo" routerLinkActive="active-link" class="submenu-item">Criar Novo Curso</a>
+      </div>
+    </div>
+    <!-- Professores -->
+    <div class="menu-item">
+      <button class="menu-button btn-orange" (click)="toggleCollapse('professor')">Professores</button>
+      <div class="submenu" [class.collapsed]="collapsed['professor']">
+        <a routerLink="/professores" routerLinkActive="active-link" class="submenu-item">Listar Professores</a>
+        <a routerLink="/professores/novo" routerLinkActive="active-link" class="submenu-item">Criar Novo Professor</a>
+      </div>
+    </div>
+    <!-- Alunos -->
+    <div class="menu-item">
+      <button class="menu-button btn-green" (click)="toggleCollapse('aluno')">Alunos</button>
+      <div class="submenu" [class.collapsed]="collapsed['aluno']">
+        <a routerLink="/alunos" routerLinkActive="active-link" class="submenu-item">Listar Alunos</a>
+        <a routerLink="/alunos/novo" routerLinkActive="active-link" class="submenu-item">Criar Novo Aluno</a>
+      </div>
+    </div>
+    <!-- Matrículas -->
+    <div class="menu-item">
+      <button class="menu-button btn-red" (click)="toggleCollapse('matricula')">Matrículas</button>
+      <div class="submenu" [class.collapsed]="collapsed['matricula']">
+        <a routerLink="/matriculas" routerLinkActive="active-link" class="submenu-item">Ver Matrículas</a>
+        <a routerLink="/matriculas/nova" routerLinkActive="active-link" class="submenu-item">Nova Matrícula</a>
+      </div>
+    </div>
+  </aside>
+
+  <main class="content-area">
+    <h1 class="dashboard-title">Sistema de Gestão Universitária</h1>
+    <router-outlet></router-outlet>
+  </main>
 </div>

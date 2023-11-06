@@ -2,14 +2,14 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
 import { catchError, retry } from 'rxjs/operators';
-import { Aluno } from '../models/aluno.model'; // Caminho do modelo Aluno
+import { Curso } from '../models/curso.model'; // Caminho do modelo Aluno
 import { environment } from 'src/environment/environment';
 
 @Injectable({
   providedIn: 'root'
 })
-export class AlunoService {
-  private apiUrl = `${environment.apiUrl}/aluno`;
+export class CursoService {
+  private apiUrl = `${environment.apiUrl}/curso`;
 
   httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })
@@ -17,16 +17,24 @@ export class AlunoService {
 
   constructor(private http: HttpClient) {}
 
-  getAlunos(): Observable<Aluno[]> {
+  //Get
+  getCursos(): Observable<Curso[]> {
     console.log('ok')
-    return this.http.get<Aluno[]>(this.apiUrl, this.httpOptions)
+    return this.http.get<Curso[]>(`${this.apiUrl}`, this.httpOptions)
     .pipe(
         retry(2), // Tenta a chamada novamente se falhar
         catchError(this.handleError) // Trata erros em caso de falha
         );
   }
 
-  // Adicione outros métodos CRUD aqui conforme necessário
+  //Create
+  createCurso(curso: Curso): Observable<Curso> {
+    return this.http.post<Curso>(`${this.apiUrl}/create`, curso, this.httpOptions)
+      .pipe(
+        catchError(this.handleError)
+      );
+  }
+
 
   // Método para tratar erros
   private handleError(error: any) {

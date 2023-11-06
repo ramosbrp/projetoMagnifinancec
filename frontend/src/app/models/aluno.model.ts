@@ -10,7 +10,4 @@ export class Aluno{
     NumeroMatricula!: string;
     Matriculas!: Matricula[];
 
-    constructor(init?: Partial<Aluno>){
-        Object.assign(this, init);
-    }
 }

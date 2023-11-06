@@ -6,21 +6,34 @@ import { AppComponent } from './app.component';
 
 import { HttpClientModule } from '@angular/common/http';
 
-import { AlunoComponent } from './components/aluno/aluno.component';
+import { AlunoComponent } from './components/aluno/list/aluno-list.component';
+import { CursoFormComponent } from './components/curso/create-edit/curso-form.component';
+
 import { AlunoService } from './services/aluno.service';
+import { CursoService } from './services/curso.service';
+import { ProfessorService } from './services/professor.service';
+
+import { ReactiveFormsModule } from '@angular/forms';
+
+
 
 @NgModule({
   declarations: [
     AppComponent,
-    AlunoComponent
+    AlunoComponent,
+    CursoFormComponent,
+
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    HttpClientModule
+    HttpClientModule,
+    ReactiveFormsModule
   ],
   providers: [
-    AlunoService
+    AlunoService,
+    CursoService,
+    ProfessorService
   ],
   bootstrap: [AppComponent]
 })
