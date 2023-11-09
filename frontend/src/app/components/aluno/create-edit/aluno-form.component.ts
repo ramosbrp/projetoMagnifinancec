@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { CursoService } from '../../../services/curso.service';
 import { Aluno } from '../../../models/aluno.model';
 import { AlunoService } from 'src/app/services/aluno.service';
-import { FormArray, FormBuilder, FormGroup, } from '@angular/forms';
+import { FormArray, FormBuilder, FormGroup, Validators, } from '@angular/forms';
 
 @Component({
   selector: 'app-aluno-form',
@@ -20,7 +20,8 @@ export class AlunoFormComponent  {
       private alunoService: AlunoService
     ) {
       this.alunoForm = this.fb.group({
-        nome: '',
+        nome: ['', Validators.required],
+        dataNascimento: ['', Validators.required],
         disciplinas: this.fb.array([])
       });
     }
