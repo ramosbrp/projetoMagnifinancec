@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
-import { CursoService } from '../../../services/curso.service';
+
 import { Aluno } from '../../../models/aluno.model';
 import { AlunoService } from 'src/app/services/aluno.service';
-import { FormArray, FormBuilder, FormGroup, Validators, } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators, } from '@angular/forms';
 
 @Component({
   selector: 'app-aluno-form',
@@ -10,9 +10,7 @@ import { FormArray, FormBuilder, FormGroup, Validators, } from '@angular/forms';
   styleUrls: ['./aluno-form.component.css', '../../../../styles.scss']
 })
 export class AlunoFormComponent  {
-    [x: string]: any;
     alunoForm: FormGroup;
-    alunos: any[] = []; 
     alunoCadastrado: Aluno | null = null;
   
     constructor(
@@ -22,17 +20,8 @@ export class AlunoFormComponent  {
       this.alunoForm = this.fb.group({
         nome: ['', Validators.required],
         dataNascimento: ['', Validators.required],
-        disciplinas: this.fb.array([])
       });
     }
-  
-    
-  
-    get disciplinas(): FormArray {
-      return this.alunoForm.get('disciplinas') as FormArray;
-    }
-  
-    
   
     onSubmit(): void {
       if (this.alunoForm.valid) {

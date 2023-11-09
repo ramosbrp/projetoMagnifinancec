@@ -37,7 +37,7 @@ export class ProfessorService {
 
   // Criar um novo professor
   createProfessor(professor: Professor): Observable<Professor> {
-    return this.http.post<Professor>(this.apiUrl, professor, this.httpOptions)
+    return this.http.post<Professor>(`${this.apiUrl}/create`, professor, this.httpOptions)
       .pipe(
         catchError(this.handleError)
       );

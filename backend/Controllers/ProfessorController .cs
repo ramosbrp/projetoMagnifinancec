@@ -8,6 +8,7 @@ using MyUniversityAPI.Data;
 using MyUniversityAPI.Models;
 using System.Data.Entity;
 using MyUniversityAPI.App_Start;
+using System.Threading.Tasks;
 
 namespace MyUniversityAPI.Controllers
 {
@@ -42,31 +43,29 @@ namespace MyUniversityAPI.Controllers
         }
 
         [HttpPost]
-        public Professor Create(Professor professor)
+        public async Task<ActionResult> Create(Professor professor)
         {
-            if (ModelState.IsValid)
+            try
             {
-                dbContext.Professors.Add(professor);
-                dbContext.SaveChanges();
+                if (ModelState.IsValid)
+                {
+                    dbContext.Professors.Add(professor);
+                    await dbContext.SaveChangesAsync();
+
+                    // Retorna o número de matrícula gerado
+                    return Json(professor);
+                }
+                else
+                {
+                    // Se o modelo não for válido, retorne os erros de validação
+                    return Json(new { error = "Dados de entrada inválidos." });
+                }
             }
-
-
-            return professor;
+            catch (Exception)
+            {
+                return Json(new { error = "Ocorreu um erro ao processar sua solicitação.." });
+            }
         }
-
-
-        // PUT api/student/5
-        public void Put(int id, Aluno aluno)
-        {
-            // Aqui você vai atualizar um estudante pelo ID
-        }
-
-        // DELETE api/student/5
-        public void Delete(int id)
-        {
-            // Aqui você vai deletar um estudante pelo ID
-        }
-
         protected override void Dispose(bool disposing)
         {
             if (disposing)
@@ -76,4 +75,5 @@ namespace MyUniversityAPI.Controllers
             base.Dispose(disposing);
         }
     }
+
 }
