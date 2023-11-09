@@ -19,7 +19,6 @@ export class AlunoService {
 
   //Get
   getAlunos(): Observable<Aluno[]> {
-    console.log('ok')
     return this.http.get<Aluno[]>(this.apiUrl, this.httpOptions)
     .pipe(
         retry(2), // Tenta a chamada novamente se falhar
@@ -43,7 +42,6 @@ export class AlunoService {
           errorMessage = `Erro: ${error.error.message}`;
         } else {
             // Erro do lado do servidor
-            console.log('erro')
       errorMessage = `Código do erro: ${error.status}\nMensagem: ${error.message}`;
     }
     console.error(errorMessage);
