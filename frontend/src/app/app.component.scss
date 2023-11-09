@@ -1,4 +1,52 @@
 /* app.component.css */
+*{
+  margin: 0;
+  padding: 0;
+  border: none;
+  text-decoration: none;
+  box-sizing: border-box;
+}
+
+html{
+  /*Criando variáveis*/
+  // Cores primarias
+  --azul-marinho: #003366;
+  --vermelho-academico: #990000;
+  --cinza: #7F8C8D;
+  --branco: #fff;
+  --verde-academico: #228B22;
+
+  // Botoes
+    --azul-mais-forte: #004c99; /* Primário (ações principais) */
+    --cinza-claro: #cccccc; /* Secundário (ações secundárias): */
+    --verde-claro: #2ecc71; /* Sucesso (confirmações, êxitos) */
+    --vermelho-claro: #e74c3c; /* Erro (alertas, erros): */
+    --amarelo: #f1c40f; /* Aviso (notificações, avisos) */
+  
+  // Cores de Fundo
+    --cinza-muito-claro: #f2f2f2; /* Fundo principal:  */
+    --cinza-alternativo: #e6e6e6; /* Fundo alternativo:  */
+  
+  // Cores para Texto
+    --azul-escuro: #2c3e50 ; /* Título principal: */
+    --azul-esverdiado-escuro: #34495e; /* Texto padrão: */
+    --cinza: #7f8c8d; /* Texto secundário: */
+    --cinza-metalico: #bdc3c7; /* Borda de input padrão:  */
+    --azul-celeste: #3498db; /* Input focado:  */
+    --cinza-azulado: #95a5a6; /* Placeholder */
+
+  /* 1rem = 16px (User Agent) = 100% (User Agent) */
+  font-size: 62.5%; /* 10px */
+}
+
+body{
+  display: flex;
+  height: 100vh; /* view height */
+  width: 100vw; /* view width */
+  background: var(--background);
+}
+
+
 .dashboard-container {
   display: flex;
 }

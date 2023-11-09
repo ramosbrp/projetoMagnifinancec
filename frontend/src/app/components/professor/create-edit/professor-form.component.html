@@ -1,0 +1,28 @@
+<div class="form-container" >
+    <form [formGroup]="professorForm" (ngSubmit)="onSubmit()" class="form">
+        <div class="form-froup" >
+            <label for="nomeProfessor" class="form-label" >Nome do Professor:</label>
+            <input type="text" id="nomeProfessor" formControlName="nome" class="form-control" required >
+        </div>
+
+        <div class="form-group" >
+            <label for="dataNascimento" class="form-label" >Data de Nascimento:</label>
+            <input type="date" id="dataNascimento"  formControlName="dataNascimento" class="form-control" >
+        </div>
+
+        <div class="formGroup" >
+            <label for="salario" class="form-label" >Salário:</label>
+            <input type="text" id="salario"  formControlName="salario" class="form-control" >
+        </div>
+    
+        <div class="form-actions" >
+            <button type="submit" class="btn btn-primary" >Cadastrar Professor</button>
+        </div>
+    </form>
+
+    <div *ngIf="professorCadastrado" class="registration-success">
+        <p>Professor cadastrado com sucesso!</p>
+        <p>Nome: {{ professorCadastrado.Nome }}</p>
+      </div>
+
+</div>
