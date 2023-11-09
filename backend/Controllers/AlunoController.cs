@@ -9,6 +9,7 @@ using MyUniversityAPI.Models;
 using System.Data.Entity;
 using MyUniversityAPI.App_Start;
 using System.Threading.Tasks;
+using Microsoft.Ajax.Utilities;
 
 namespace MyUniversityAPI.Controllers
 {
@@ -46,17 +47,32 @@ namespace MyUniversityAPI.Controllers
         }
 
         [HttpPost]
-        public async Task<Aluno> Create(Aluno aluno)
+        public async Task<ActionResult> Create(Aluno aluno)
         {
-            if (ModelState.IsValid)
+            try
             {
-                aluno.NumeroMatricula = GerarNumeroMatricula();
+                if (ModelState.IsValid)
+                {
+                    aluno.NumeroMatricula = GerarNumeroMatricula();
 
-                dbContext.Alunos.Add(aluno);
-                await dbContext.SaveChangesAsync();
+                    dbContext.Alunos.Add(aluno);
+                    await dbContext.SaveChangesAsync();
+
+                    // Retorna o número de matrícula gerado
+                    return Json (new {alunoRetorno = aluno});
+                }
+                else
+                {
+                    // Se o modelo não for válido, retorne os erros de validação
+                    return Json(new { error = "Dados de entrada inválidos." });
+                }
+
+            }
+            catch (Exception ex)
+            {
+                return Json(new { error = "Ocorreu um erro ao processar sua solicitação." });
             }
 
-            return aluno;
         }
 
 
