@@ -15,6 +15,8 @@ import { ProfessorService } from './services/professor.service';
 
 import { ReactiveFormsModule } from '@angular/forms';
 import { AlunoFormComponent } from './components/aluno/create-edit/aluno-form.component';
+import { ProfessorFormComponent } from './components/professor/create-edit/professor-form.component';
+import { ProfessorComponent } from './components/professor/list/professor-list.component';
 
 
 
@@ -23,7 +25,9 @@ import { AlunoFormComponent } from './components/aluno/create-edit/aluno-form.co
     AppComponent,
     AlunoComponent,
     CursoFormComponent,
-    AlunoFormComponent
+    AlunoFormComponent,
+    ProfessorFormComponent,
+    ProfessorComponent
 
   ],
   imports: [
@@ -35,7 +39,7 @@ import { AlunoFormComponent } from './components/aluno/create-edit/aluno-form.co
   providers: [
     AlunoService,
     CursoService,
-    ProfessorService
+    ProfessorService,
   ],
   bootstrap: [AppComponent]
 })

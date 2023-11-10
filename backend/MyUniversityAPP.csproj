@@ -141,6 +141,10 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202311102143161_Adicionado ProfessorId em Disciplina.cs" />
+    <Compile Include="Migrations\202311102143161_Adicionado ProfessorId em Disciplina.designer.cs">
+      <DependentUpon>202311102143161_Adicionado ProfessorId em Disciplina.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Migrations\202311042147125_InitialCreate.cs" />
     <Compile Include="Migrations\202311042147125_InitialCreate.designer.cs">
@@ -239,6 +243,9 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\202311042147125_InitialCreate.resx">
       <DependentUpon>202311042147125_InitialCreate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202311102143161_Adicionado ProfessorId em Disciplina.resx">
+      <DependentUpon>202311102143161_Adicionado ProfessorId em Disciplina.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

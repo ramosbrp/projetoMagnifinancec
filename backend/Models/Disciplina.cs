@@ -11,6 +11,7 @@ namespace MyUniversityAPI.Models
         public string Nome { get; set; }
         public int CursoId { get; set; }
         public virtual Curso Curso { get; set; }
+        public int ProfessorId { get; set; }
         public virtual Professor Professor { get; set; }
         public virtual ICollection<Matricula> Matriculas { get; set; }
 

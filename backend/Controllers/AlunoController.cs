@@ -59,7 +59,7 @@ namespace MyUniversityAPI.Controllers
                     await dbContext.SaveChangesAsync();
 
                     // Retorna o número de matrícula gerado
-                    return Json (new {alunoRetorno = aluno});
+                    return Json (aluno);
                 }
                 else
                 {
