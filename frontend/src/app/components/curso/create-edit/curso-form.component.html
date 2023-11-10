@@ -12,8 +12,8 @@
   
         <label for="professor">Professor:</label>
         <select formControlName="professorId">
-          <option *ngFor="let professor of professores" [value]="professor.id">
-            {{ professor.nome }}
+          <option *ngFor="let professor of professores" ngValue="professor.Id">
+            {{ professor.Nome }}
           </option>
         </select>
         
