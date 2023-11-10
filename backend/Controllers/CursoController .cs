@@ -8,6 +8,7 @@ using MyUniversityAPI.Data;
 using MyUniversityAPI.Models;
 using System.Data.Entity;
 using MyUniversityAPI.App_Start;
+using System.Threading.Tasks;
 
 namespace MyUniversityAPI.Controllers
 {
@@ -42,16 +43,25 @@ namespace MyUniversityAPI.Controllers
         }
 
         [HttpPost]
-        public Curso Create(Curso curso)
+        public async Task<ActionResult> Create(Curso curso)
         {
-            if (ModelState.IsValid)
+            try
             {
-                dbContext.Cursos.Add(curso);
-                dbContext.SaveChanges();
+                if (ModelState.IsValid)
+                {
+                    dbContext.Cursos.Add(curso);
+                    await dbContext.Cursos.SingleAsync();
+
+                    return Json(curso);
+                }else
+                {
+                    return Json(new { error = "Dados de entrada inválidos." });
+                }
             }
-
-
-            return curso;
+            catch (Exception)
+            {
+                return Json(new { error = "Ocorreu um erro ao processar sua solicitação.." });
+            }
         }
 
 
