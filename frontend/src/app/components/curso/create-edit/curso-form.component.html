@@ -11,8 +11,8 @@
         <input type="text" id="nome" formControlName="nome" required>
   
         <label for="professor">Professor:</label>
-        <select formControlName="professorId">
-          <option *ngFor="let professor of professores" ngValue="professor.Id">
+        <select formControlName="professorId" >
+          <option *ngFor="let professor of professores" ngValue="professor.Id"  >
             {{ professor.Nome }}
           </option>
         </select>

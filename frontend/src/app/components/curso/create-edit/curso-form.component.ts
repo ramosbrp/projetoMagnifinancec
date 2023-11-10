@@ -4,6 +4,7 @@ import { Curso } from '../../../models/curso.model';
 import { ProfessorService } from 'src/app/services/professor.service';
 import { FormArray, FormBuilder, FormGroup, } from '@angular/forms';
 import { Professor } from 'src/app/models/professor.model';
+import { Disciplina } from 'src/app/models/disciplina.model';
 
 @Component({
   selector: 'app-curso-form',
@@ -41,6 +42,7 @@ export class CursoFormComponent implements OnInit {
       return this.cursoForm.get('disciplinas') as FormArray;
     }
   
+
     novaDisciplina(): FormGroup {
       return this.fb.group({
         nome: '',
@@ -56,8 +58,10 @@ export class CursoFormComponent implements OnInit {
       this.disciplinas.removeAt(index);
     }
   
+    
     onSubmit(): void {
       if (this.cursoForm.valid) {
+        console.log(this.cursoForm)
         this.cursoService.createCurso(this.cursoForm.value).subscribe(
           // Trate a resposta aqui
         );
