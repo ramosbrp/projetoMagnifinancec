@@ -3,7 +3,7 @@ import { CursoService } from '../../../services/curso.service';
 import { Curso } from '../../../models/curso.model';
 import { ProfessorService } from 'src/app/services/professor.service';
 import { FormArray, FormBuilder, FormGroup, } from '@angular/forms';
-import { ReactiveFormsModule } from '@angular/forms';
+import { Professor } from 'src/app/models/professor.model';
 
 @Component({
   selector: 'app-curso-form',
@@ -12,7 +12,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 })
 export class CursoFormComponent implements OnInit {
     cursoForm: FormGroup;
-    professores: any[] = []; // Substitua 'any' pelo tipo correto se tiver um modelo para professores
+    professores: Professor[] = []; // Substitua 'any' pelo tipo correto se tiver um modelo para professores
   
     constructor(
       private fb: FormBuilder,
@@ -26,11 +26,15 @@ export class CursoFormComponent implements OnInit {
     }
   
     ngOnInit(): void {
-      this.professorService.getProfessores().subscribe(
-        professoresData => {
-          this.professores = professoresData; // Assumindo que retorna um array de professores
+      this.professorService.getProfessores().subscribe({
+        next: (professores) => {
+          this.professores = professores
+          console.log(professores)
+        },
+        error: (error) => {
+          console.error(error);
         }
-      );
+      });
     }
   
     get disciplinas(): FormArray {
