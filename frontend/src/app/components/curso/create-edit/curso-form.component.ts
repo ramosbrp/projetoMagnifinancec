@@ -30,12 +30,18 @@ export class CursoFormComponent implements OnInit {
       this.professorService.getProfessores().subscribe({
         next: (professores) => {
           this.professores = professores
-          console.log(professores)
         },
         error: (error) => {
           console.error(error);
         }
       });
+
+      this.disciplinas.controls.forEach((control, index) => {
+        control.valueChanges.subscribe( value =>{
+          console.log(value, index)
+        })
+      });
+
     }
   
     get disciplinas(): FormArray {
@@ -51,7 +57,16 @@ export class CursoFormComponent implements OnInit {
     }
   
     adicionarDisciplina(): void {
-      this.disciplinas.push(this.novaDisciplina());
+      const novaDisciplina = this.novaDisciplina();
+      this.disciplinas.push(novaDisciplina);
+
+      const index = this.disciplinas.length -1;
+
+      novaDisciplina.get('professorId')?.valueChanges.subscribe( value => {
+        console.log(`${value}`)
+
+      })
+
     }
   
     removerDisciplina(index: number): void {
