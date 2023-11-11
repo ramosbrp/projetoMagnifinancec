@@ -49,8 +49,12 @@ namespace MyUniversityAPI.Controllers
             {
                 if (ModelState.IsValid)
                 {
+                    Professor professor = dbContext.Professors.Find(curso.Disciplinas.First().ProfessorId);
+
+                    curso.Disciplinas.First().Professor = professor;
+
                     dbContext.Cursos.Add(curso);
-                    await dbContext.Cursos.SingleAsync();
+                    await dbContext.SaveChangesAsync();
 
                     return Json(curso);
                 }else
@@ -58,7 +62,7 @@ namespace MyUniversityAPI.Controllers
                     return Json(new { error = "Dados de entrada inválidos." });
                 }
             }
-            catch (Exception)
+            catch (Exception ex)
             {
                 return Json(new { error = "Ocorreu um erro ao processar sua solicitação.." });
             }
