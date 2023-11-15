@@ -17,13 +17,21 @@ namespace MyUniversityAPI.Controllers
         private readonly ApplicationDbContext dbContext = new ApplicationDbContext();
 
         [HttpGet]
-        public ActionResult Index()
+        public async Task<ActionResult> Index()
         {
-            //Inclui as Matriculas relacionadas com cada Professor
-            var professores = dbContext.Professors.Include(a => a.Disciplinas).ToList();
+            try
+            {
+                //Inclui as Matriculas relacionadas com cada Professor
+                var professores = await dbContext.Professors.Include(a => a.Disciplinas.Select(d => d.Curso)).ToListAsync();
 
-            // Retorna a lista como JSON
-            return Json(professores, JsonRequestBehavior.AllowGet);
+                // Retorna a lista como JSON
+                return Json(professores, JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception)
+            {
+                return Json(new {error = "Ocorreu um erro ao processar sua solicitação..." });
+            }
+
         }
 
         public ActionResult Details(int? id)

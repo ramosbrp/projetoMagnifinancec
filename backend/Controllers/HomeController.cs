@@ -10,7 +10,7 @@ namespace MyUniversityAPI.Controllers
     {
         public ActionResult Index()
         {
-            return View();
+            return File("~/Content/AngularApp/index.html", "text/html");
         }
 
         public ActionResult About()
@@ -22,7 +22,7 @@ namespace MyUniversityAPI.Controllers
 
         public ActionResult Contact()
         {
-            ViewBag.Message = "Your contact page.";
+            ViewBag.Message = "Your contact page."; 
 
             return View();
         }
