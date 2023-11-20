@@ -1,7 +1,7 @@
 import { Disciplina } from "./disciplina.model";
 
 export class Curso{
-    CursoId!: number;
+    Id!: number;
     Nome!: string;
     Disciplinas!: Disciplina[];
 }

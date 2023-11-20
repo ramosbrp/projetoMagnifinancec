@@ -4,11 +4,10 @@ import { Matricula } from './aluno.model';
 
 export class Disciplina{
 
-        DisciplinaId!: number;
+        Id!: number;
         Nome!: string;
         CursoId!: number;
         Curso!: Curso;
-        ProfessorId!: string;
         Professor!: Professor;
         Matriculas?: Matricula[];
 }

@@ -7,7 +7,7 @@ namespace MyUniversityAPI.Models
 {
     public class Curso
     {
-        public int CursoId { get; set; }
+        public int Id { get; set; }
         public string Nome { get; set; }
         public virtual ICollection<Disciplina> Disciplinas { get; set; }
 

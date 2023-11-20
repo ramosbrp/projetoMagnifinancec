@@ -141,18 +141,21 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\202311102143161_Adicionado ProfessorId em Disciplina.cs" />
-    <Compile Include="Migrations\202311102143161_Adicionado ProfessorId em Disciplina.designer.cs">
-      <DependentUpon>202311102143161_Adicionado ProfessorId em Disciplina.cs</DependentUpon>
+    <Compile Include="Migrations\202311201752270_InitialCreate.cs" />
+    <Compile Include="Migrations\202311201752270_InitialCreate.designer.cs">
+      <DependentUpon>202311201752270_InitialCreate.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202311201801237_ProfessorIdNull.cs" />
+    <Compile Include="Migrations\202311201801237_ProfessorIdNull.designer.cs">
+      <DependentUpon>202311201801237_ProfessorIdNull.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
-    <Compile Include="Migrations\202311042147125_InitialCreate.cs" />
-    <Compile Include="Migrations\202311042147125_InitialCreate.designer.cs">
-      <DependentUpon>202311042147125_InitialCreate.cs</DependentUpon>
-    </Compile>
     <Compile Include="Models\Aluno.cs" />
     <Compile Include="Models\Curso.cs" />
     <Compile Include="Models\Disciplina.cs" />
+    <Compile Include="Models\DTO\CursoDto.cs" />
+    <Compile Include="Models\DTO\DisciplinaDto.cs" />
+    <Compile Include="Models\DTO\ProfessorDto.cs" />
     <Compile Include="Models\Matricula.cs" />
     <Compile Include="Models\Pessoa.cs" />
     <Compile Include="Models\Professor.cs" />
@@ -241,11 +244,11 @@
     <Content Include="Scripts\jquery-3.4.1.min.map" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\202311042147125_InitialCreate.resx">
-      <DependentUpon>202311042147125_InitialCreate.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\202311201752270_InitialCreate.resx">
+      <DependentUpon>202311201752270_InitialCreate.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202311102143161_Adicionado ProfessorId em Disciplina.resx">
-      <DependentUpon>202311102143161_Adicionado ProfessorId em Disciplina.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\202311201801237_ProfessorIdNull.resx">
+      <DependentUpon>202311201801237_ProfessorIdNull.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

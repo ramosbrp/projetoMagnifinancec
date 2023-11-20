@@ -11,23 +11,23 @@
                 "dbo.Alunoes",
                 c => new
                     {
-                        AlunoId = c.Int(nullable: false, identity: true),
+                        Id = c.Int(nullable: false, identity: true),
                         Nome = c.String(),
                         DataNascimento = c.DateTime(nullable: false),
                         NumeroMatricula = c.String(),
                     })
-                .PrimaryKey(t => t.AlunoId);
+                .PrimaryKey(t => t.Id);
             
             CreateTable(
                 "dbo.Matriculas",
                 c => new
                     {
-                        MatriculaId = c.Int(nullable: false, identity: true),
+                        Id = c.Int(nullable: false, identity: true),
                         AlunoId = c.Int(nullable: false),
                         DisciplinaId = c.Int(nullable: false),
                         Nota = c.Decimal(nullable: false, precision: 18, scale: 2),
                     })
-                .PrimaryKey(t => t.MatriculaId)
+                .PrimaryKey(t => t.Id)
                 .ForeignKey("dbo.Alunoes", t => t.AlunoId, cascadeDelete: true)
                 .ForeignKey("dbo.Disciplinas", t => t.DisciplinaId, cascadeDelete: true)
                 .Index(t => t.AlunoId)
@@ -37,46 +37,46 @@
                 "dbo.Disciplinas",
                 c => new
                     {
-                        DisciplinaId = c.Int(nullable: false, identity: true),
+                        Id = c.Int(nullable: false, identity: true),
                         Nome = c.String(),
                         CursoId = c.Int(nullable: false),
-                        Professor_ProfessorId = c.Int(),
+                        ProfessorId = c.Int(nullable: false),
                     })
-                .PrimaryKey(t => t.DisciplinaId)
+                .PrimaryKey(t => t.Id)
                 .ForeignKey("dbo.Cursoes", t => t.CursoId, cascadeDelete: true)
-                .ForeignKey("dbo.Professors", t => t.Professor_ProfessorId)
+                .ForeignKey("dbo.Professors", t => t.ProfessorId, cascadeDelete: true)
                 .Index(t => t.CursoId)
-                .Index(t => t.Professor_ProfessorId);
+                .Index(t => t.ProfessorId);
             
             CreateTable(
                 "dbo.Cursoes",
                 c => new
                     {
-                        CursoId = c.Int(nullable: false, identity: true),
+                        Id = c.Int(nullable: false, identity: true),
                         Nome = c.String(),
                     })
-                .PrimaryKey(t => t.CursoId);
+                .PrimaryKey(t => t.Id);
             
             CreateTable(
                 "dbo.Professors",
                 c => new
                     {
-                        ProfessorId = c.Int(nullable: false, identity: true),
+                        Id = c.Int(nullable: false, identity: true),
                         Nome = c.String(),
                         DataNascimento = c.DateTime(nullable: false),
                         Salario = c.Decimal(nullable: false, precision: 18, scale: 2),
                     })
-                .PrimaryKey(t => t.ProfessorId);
+                .PrimaryKey(t => t.Id);
             
         }
         
         public override void Down()
         {
-            DropForeignKey("dbo.Disciplinas", "Professor_ProfessorId", "dbo.Professors");
+            DropForeignKey("dbo.Disciplinas", "ProfessorId", "dbo.Professors");
             DropForeignKey("dbo.Matriculas", "DisciplinaId", "dbo.Disciplinas");
             DropForeignKey("dbo.Disciplinas", "CursoId", "dbo.Cursoes");
             DropForeignKey("dbo.Matriculas", "AlunoId", "dbo.Alunoes");
-            DropIndex("dbo.Disciplinas", new[] { "Professor_ProfessorId" });
+            DropIndex("dbo.Disciplinas", new[] { "ProfessorId" });
             DropIndex("dbo.Disciplinas", new[] { "CursoId" });
             DropIndex("dbo.Matriculas", new[] { "DisciplinaId" });
             DropIndex("dbo.Matriculas", new[] { "AlunoId" });
