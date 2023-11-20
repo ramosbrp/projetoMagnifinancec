@@ -7,7 +7,7 @@ namespace MyUniversityAPI.Models
 {
     public class Aluno
     {
-        public int AlunoId { get; set; }
+        public int Id { get; set; }
         public string Nome { get; set; }
         public DateTime DataNascimento { get; set; }
         public string NumeroMatricula { get; set; }

@@ -10,7 +10,7 @@ namespace MyUniversityAPI.Controllers
     {
         public ActionResult Index()
         {
-            return File("~/Content/AngularApp/index.html", "text/html");
+            return View();
         }
 
         public ActionResult About()

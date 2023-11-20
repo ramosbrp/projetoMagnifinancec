@@ -13,7 +13,7 @@ namespace MyUniversityAPI.Migrations
         
         string IMigrationMetadata.Id
         {
-            get { return "202311042147125_InitialCreate"; }
+            get { return "202311201752270_InitialCreate"; }
         }
         
         string IMigrationMetadata.Source

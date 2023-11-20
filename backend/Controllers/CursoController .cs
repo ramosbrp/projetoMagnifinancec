@@ -20,6 +20,7 @@ namespace MyUniversityAPI.Controllers
         public ActionResult Index()
         {
             //Inclui as Disciplinas relacionadas com cada Curso
+            
             var cursos = dbContext.Cursos.Include(a => a.Disciplinas).ToList();
 
             // Retorna a lista como JSON
@@ -49,9 +50,6 @@ namespace MyUniversityAPI.Controllers
             {
                 if (ModelState.IsValid)
                 {
-                    Professor professor = dbContext.Professors.Find(curso.Disciplinas.First().ProfessorId);
-
-                    curso.Disciplinas.First().Professor = professor;
 
                     dbContext.Cursos.Add(curso);
                     await dbContext.SaveChangesAsync();

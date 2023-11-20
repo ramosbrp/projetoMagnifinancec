@@ -9,6 +9,8 @@ using MyUniversityAPI.Models;
 using System.Data.Entity;
 using MyUniversityAPI.App_Start;
 using System.Threading.Tasks;
+using MyUniversityAPI.Models.Dto;
+using MyUniversityAPI.Models.DTO;
 
 namespace MyUniversityAPI.Controllers
 {
@@ -22,14 +24,31 @@ namespace MyUniversityAPI.Controllers
             try
             {
                 //Inclui as Matriculas relacionadas com cada Professor
-                var professores = await dbContext.Professors.Include(a => a.Disciplinas.Select(d => d.Curso)).ToListAsync();
+                List<Professor> professores = new List<Professor>();
+                professores = await dbContext.Professors
+                .ToListAsync();
+
+                List<ProfessorDto> professoresDto = new List<ProfessorDto>();
+
+                professoresDto =  professores.Select(p => new ProfessorDto
+                {
+                    Id = p.Id,
+                    Nome = p.Nome,
+                    Disciplinas = p.Disciplinas.Select(d => new DisciplinaDto
+                    {
+                        Id=d.Id,
+                        Nome=d.Nome,
+                    }).ToList()
+                }).ToList();
+
+
 
                 // Retorna a lista como JSON
-                return Json(professores, JsonRequestBehavior.AllowGet);
+                return Json(professoresDto, JsonRequestBehavior.AllowGet);
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                return Json(new {error = "Ocorreu um erro ao processar sua solicitação..." });
+                return Json(new { error = "Ocorreu um erro ao processar sua solicitação..." });
             }
 
         }

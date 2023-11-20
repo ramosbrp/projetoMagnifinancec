@@ -7,13 +7,13 @@ namespace MyUniversityAPI.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.4.4")]
-    public sealed partial class AdicionadoProfessorIdemDisciplina : IMigrationMetadata
+    public sealed partial class ProfessorIdNull : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(AdicionadoProfessorIdemDisciplina));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(ProfessorIdNull));
         
         string IMigrationMetadata.Id
         {
-            get { return "202311102143161_Adicionado ProfessorId em Disciplina"; }
+            get { return "202311201801237_ProfessorIdNull"; }
         }
         
         string IMigrationMetadata.Source
