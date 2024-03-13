@@ -23,10 +23,10 @@ namespace MyUniversityAPI.Controllers
         public ActionResult Index()
         {
             //Inclui as Matriculas relacionadas com cada Aluno
-            var alunosComMatriculas = dbContext.Alunos.Include(a => a.Matriculas).ToList();
+            var alunos= dbContext.Alunos.Include(a => a.Matriculas).ToList();
 
             // Retorna a lista como JSON
-            return Json(alunosComMatriculas, JsonRequestBehavior.AllowGet);
+            return Json(alunos, JsonRequestBehavior.AllowGet);
         }
 
         // GET api/student/5

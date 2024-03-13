@@ -7,7 +7,7 @@ namespace MyUniversityAPI.Models
 {
     public class Professor
     {
-        public int ProfessorId { get; set; }
+        public int Id { get; set; }
         public string Nome { get; set; }
         public DateTime DataNascimento { get; set; }
         public decimal Salario { get; set; }

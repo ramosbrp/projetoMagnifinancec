@@ -4,19 +4,20 @@
       <label for="nome" class="form-label">Nome do Curso:</label>
       <input type="text" id="nome" formControlName="nome" class="form-control" required>
     </div>
-    
+
     <div formArrayName="disciplinas">
-      <div *ngFor="let disciplina of disciplinas.controls; let i=index" [formGroupName]="i">
-        <label for="nome">Nome da Disciplina:</label>
-        <input type="text" id="nome" formControlName="nome" required>
-  
-        <label for="professor">Professor:</label>
-        <select formControlName="professorId" >
-          <option *ngFor="let professor of professores" ngValue="professor.Id"  >
-            {{ professor.Nome }}
-          </option>
-        </select>
-        
+      <div id="disciplina" class="" *ngFor="let disciplina of disciplinas.controls; let i=index" [formGroupName]="i">
+        <div class="">
+          <input type="text" id="nome" formControlName="nome" class="" placeholder="Nome da Disciplina" >
+
+          <select formControlName="professorId" class="form-select">
+            <option [ngValue]="null">Selecione</option>
+            <option *ngFor="let professor of professores" [ngValue]="professor.Id">
+              {{ professor.Nome }}
+            </option>
+          </select>
+        </div>
+
         <button type="button" (click)="removerDisciplina(i)">Remover Disciplina</button>
       </div>
     </div>
@@ -27,5 +28,3 @@
     </div>
   </form>
 </div>
-
-  

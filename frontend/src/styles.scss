@@ -1,6 +1,7 @@
 /* styles.css */
 .form-container {
-  max-width: 500px;
+  width: 40vw;
+  max-width: 80vw;
   margin: 2rem auto;
   padding: 2rem;
   background-color: #fff;
@@ -38,6 +39,7 @@
 }
 
 .form-actions {
+  margin-top: 15px;
   display: flex;
   justify-content: flex-end;
   gap: 1rem;
@@ -69,4 +71,3 @@
 .btn-secondary:hover {
   background-color: #5a6268;
 }
-
