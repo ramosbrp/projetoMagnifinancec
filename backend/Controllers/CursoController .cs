@@ -9,6 +9,8 @@ using MyUniversityAPI.Models;
 using System.Data.Entity;
 using MyUniversityAPI.App_Start;
 using System.Threading.Tasks;
+using MyUniversityAPI.Models.DTO;
+using MyUniversityAPI.Models.Dto;
 
 namespace MyUniversityAPI.Controllers
 {
@@ -17,15 +19,38 @@ namespace MyUniversityAPI.Controllers
         private readonly ApplicationDbContext dbContext = new ApplicationDbContext();
 
         [HttpGet]
-        public ActionResult Index()
+        public async Task<ActionResult> Index()
         {
-            //Inclui as Disciplinas relacionadas com cada Curso
-            
-            var cursos = dbContext.Cursos.Include(a => a.Disciplinas).ToList();
+            try
+            {
+                List<Curso> cursos = new List<Curso>();
+                cursos = await dbContext.Cursos.ToListAsync();
 
-            // Retorna a lista como JSON
-            return Json(cursos, JsonRequestBehavior.AllowGet);
+                List<CursoDto> cursoDtos = new List<CursoDto>();
+
+                cursoDtos = cursos.Select(c => new CursoDto
+                {
+                    Id = c.Id,
+                    Nome = c.Nome,
+                    Disciplinas = c.Disciplinas.Select(p => new DisciplinaDto
+                    {
+                        Id=p.Id,
+                        Nome=p.Nome,
+                    }
+                    ).ToList()
+
+                }).ToList();
+
+                return Json(cursoDtos, JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception ex)
+            {
+                return Json(new { error = "Ocorreu um erro ao processar sua solicitação...." });
+            }
         }
+
+
+
 
         public ActionResult Details(int? id)
         {

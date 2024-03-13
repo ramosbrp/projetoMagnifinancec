@@ -10,6 +10,6 @@ namespace MyUniversityAPI.Models.Dto
     {
         public int Id { get; set; }
         public string Nome { get; set; }
-        public List<DisciplinaDto> Disciplinas{ get; set; }
+        public List<DisciplinaDto> Disciplinas { get; set; }
     }
 }
