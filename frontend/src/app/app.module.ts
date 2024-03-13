@@ -17,6 +17,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { AlunoFormComponent } from './components/aluno/create-edit/aluno-form.component';
 import { ProfessorFormComponent } from './components/professor/create-edit/professor-form.component';
 import { ProfessorComponent } from './components/professor/list/professor-list.component';
+import { CursoListComponent } from './components/curso/list/curso-list.component';
 
 
 
@@ -27,7 +28,8 @@ import { ProfessorComponent } from './components/professor/list/professor-list.c
     CursoFormComponent,
     AlunoFormComponent,
     ProfessorFormComponent,
-    ProfessorComponent
+    ProfessorComponent,
+    CursoListComponent
 
   ],
   imports: [
