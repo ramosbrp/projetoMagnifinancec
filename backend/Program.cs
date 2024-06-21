@@ -1,7 +1,13 @@
+using MyUniversityAPP.Data;
+using Microsoft.EntityFrameworkCore;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Adiciona suporte para controllers (não precisamos de ControllersWithViews pois você está servindo uma SPA)
 builder.Services.AddControllers();
+
+builder.Services.AddDbContext<ApplicationDbContext>(options =>
+    options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
 var app = builder.Build();
 
