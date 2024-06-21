@@ -7,11 +7,6 @@
         public DateTime DataNascimento { get; set; }
         public string NumeroMatricula { get; set; }
         // Supondo que um aluno pode estar matriculado em várias disciplinas
-        public virtual ICollection<Matricula> Matriculas { get; set; }
-
-        public Aluno()
-        {
-            Matriculas = new HashSet<Matricula>();
-        }
+        public virtual List<Matricula> Matriculas { get; set; } = new List<Matricula>();
     }
 }
