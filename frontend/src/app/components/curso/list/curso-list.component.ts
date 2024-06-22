@@ -19,7 +19,8 @@ export class CursoListComponent{
   getCursos(): void{
     this.cursoService.getCursos().subscribe({
       next: (cursos) => {
-        this.cursos = cursos
+        this.cursos = cursos;
+        console.log(cursos);
       },
       error: (error => {
         console.error(error);

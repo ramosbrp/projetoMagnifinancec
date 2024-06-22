@@ -5,6 +5,10 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Adiciona suporte para controllers (não precisamos de ControllersWithViews pois você está servindo uma SPA)
 builder.Services.AddControllers();
+builder.Services.AddControllers().AddJsonOptions(options =>
+{
+    options.JsonSerializerOptions.PropertyNamingPolicy = null; // Mantém PascalCase
+});
 
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
@@ -32,6 +36,6 @@ app.UseEndpoints(endpoints =>
 });
 
 // Servir o arquivo index.html para todas as rotas não API
-app.MapFallbackToFile("index.html");
+//app.MapFallbackToFile("index.html");
 
 app.Run();
