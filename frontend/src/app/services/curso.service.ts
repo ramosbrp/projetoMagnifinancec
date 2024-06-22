@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
-import { catchError, retry } from 'rxjs/operators';
+import { catchError, retry , tap, map} from 'rxjs/operators';
 import { Curso } from '../models/curso.model'; // Caminho do modelo Aluno
 import { environment } from 'src/environment/environment';
 
@@ -15,16 +15,17 @@ export class CursoService {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })
   };
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) { }
 
   //Get
   getCursos(): Observable<Curso[]> {
-    console.log('ok')
-    return this.http.get<Curso[]>(`${this.apiUrl}`, this.httpOptions)
-    .pipe(
-        retry(2), // Tenta a chamada novamente se falhar
+    return this.http.get<{Success: boolean, Message: string, Data: Curso[]}>(`${this.apiUrl}`, this.httpOptions)
+      .pipe(
+        tap(response => console.log(response.Data)),
+        map(response => response.Data),
+        retry(2),
         catchError(this.handleError) // Trata erros em caso de falha
-        );
+      );
   }
 
   //Create
@@ -38,13 +39,13 @@ export class CursoService {
 
   // Método para tratar erros
   private handleError(error: any) {
-      let errorMessage = '';
-      if (error.error instanceof ErrorEvent) {
-          // Erro do lado do cliente
-          errorMessage = `Erro: ${error.error.message}`;
-        } else {
-            // Erro do lado do servidor
-            console.log('erro')
+    let errorMessage = '';
+    if (error.error instanceof ErrorEvent) {
+      // Erro do lado do cliente
+      errorMessage = `Erro: ${error.error.message}`;
+    } else {
+      // Erro do lado do servidor
+      console.log('erro')
       errorMessage = `Código do erro: ${error.status}\nMensagem: ${error.message}`;
     }
     console.error(errorMessage);
