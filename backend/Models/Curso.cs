@@ -1,19 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
+﻿using MyUniversityAPP.Models.DTO;
 
-namespace MyUniversityAPI.Models
+namespace MyUniversityAPP.Models
 {
     public class Curso
     {
         public int Id { get; set; }
         public string Nome { get; set; }
-        public virtual ICollection<Disciplina> Disciplinas { get; set; }
+        public virtual List<Disciplina> Disciplinas { get; set; } 
 
-        public Curso()
-        {
-            Disciplinas = new HashSet<Disciplina>();
-        }
+        
     }
 }

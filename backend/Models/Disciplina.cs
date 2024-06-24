@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-
-namespace MyUniversityAPI.Models
+﻿namespace MyUniversityAPP.Models
 {
     public class Disciplina
     {
@@ -13,11 +8,6 @@ namespace MyUniversityAPI.Models
         public int? ProfessorId { get; set; }
         public virtual Curso Curso { get; set; }
         public virtual Professor Professor { get; set; }
-        public virtual ICollection<Matricula> Matriculas { get; set; }
-
-        public Disciplina()
-        {
-            Matriculas = new HashSet<Matricula>();
-        }
+        public virtual List<Matricula> Matriculas { get; set; } = new List<Matricula>();
     }
 }
