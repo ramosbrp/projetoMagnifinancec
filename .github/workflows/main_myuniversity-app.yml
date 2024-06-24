@@ -12,7 +12,7 @@ on:
 env:
   DOTNET_ROOT: './publish'
 
-obs:
+jobs:
   build:
     runs-on: ubuntu-latest
 
