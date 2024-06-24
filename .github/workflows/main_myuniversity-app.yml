@@ -12,7 +12,6 @@ on:
 env:
   DOTNET_ROOT: './publish'
 
-j
 obs:
   build:
     runs-on: ubuntu-latest
@@ -21,7 +20,7 @@ obs:
       - uses: actions/checkout@v4
 
       - name: Set up .NET Core
-        uses: actions/setup-dotnet@v1
+        uses: actions/setup-dotnet@v2
         with:
           dotnet-version: '8.0'
           include-prerelease: true
