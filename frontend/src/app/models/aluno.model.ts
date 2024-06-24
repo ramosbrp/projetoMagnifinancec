@@ -4,7 +4,7 @@ export interface Matricula{
 }
 
 export class Aluno{
-    AlunoId!: number;
+    Id!: number;
     Nome!: string;
     DataNascimento!: Date;
     NumeroMatricula!: string;

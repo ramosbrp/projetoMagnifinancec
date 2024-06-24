@@ -9,11 +9,11 @@ import { Disciplina } from 'src/app/models/disciplina.model';
 @Component({
   selector: 'app-curso-form',
   templateUrl: './curso-form.component.html',
-  styleUrls: ['./curso-form.component.css', '../../../../styles.scss']
+  styleUrls: ['./curso-form.component.scss', '../../../../styles.scss']
 })
 export class CursoFormComponent implements OnInit {
     cursoForm: FormGroup;
-    professores: Professor[] = []; // Substitua 'any' pelo tipo correto se tiver um modelo para professores
+    professores: Professor[] = []; 
   
     constructor(
       private fb: FormBuilder,
@@ -52,7 +52,7 @@ export class CursoFormComponent implements OnInit {
     novaDisciplina(): FormGroup {
       return this.fb.group({
         nome: '',
-        professorId: '' // Você pode armazenar o ID do professor aqui
+        professorId: null // Armazenar o ID do professor aqui
       });
     }
   

@@ -1,22 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-
-namespace MyUniversityAPI.Models
+﻿namespace MyUniversityAPP.Models
 {
     public class Aluno
     {
-        public int AlunoId { get; set; }
+        public int Id { get; set; }
         public string Nome { get; set; }
         public DateTime DataNascimento { get; set; }
         public string NumeroMatricula { get; set; }
         // Supondo que um aluno pode estar matriculado em várias disciplinas
-        public virtual ICollection<Matricula> Matriculas { get; set; }
-
-        public Aluno()
-        {
-            Matriculas = new HashSet<Matricula>();
-        }
+        public virtual List<Matricula> Matriculas { get; set; } = new List<Matricula>();
     }
 }
