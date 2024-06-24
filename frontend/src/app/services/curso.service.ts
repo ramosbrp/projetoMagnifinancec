@@ -10,6 +10,7 @@ import { environment } from 'src/environment/environment';
 })
 export class CursoService {
   private apiUrl = `${environment.apiUrl}/curso`;
+  private apiUrlProd = `api/curso`;
 
   httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })
@@ -19,12 +20,12 @@ export class CursoService {
 
   //Get
   getCursos(): Observable<Curso[]> {
-    return this.http.get<{Success: boolean, Message: string, Data: Curso[]}>(`${this.apiUrl}`, this.httpOptions)
+    return this.http.get<{Success: boolean, Message: string, Data: Curso[]}>(`${this.apiUrlProd}`, this.httpOptions)
       .pipe(
         tap(response => console.log(response.Data)),
         map(response => response.Data),
         retry(2),
-        catchError(this.handleError) // Trata erros em caso de falha
+        catchError(this.handleError) 
       );
   }
 
