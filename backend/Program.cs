@@ -35,6 +35,7 @@ app.UseEndpoints(endpoints =>
     endpoints.MapControllers();
 });
 
+
 // Servir o arquivo index.html para todas as rotas não API
 //app.MapFallbackToFile("index.html");
 
