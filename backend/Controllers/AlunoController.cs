@@ -1,5 +1,7 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.ApplicationInsights;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.IdentityModel.Abstractions;
 using MyUniversityAPP.Data;
 using MyUniversityAPP.Models;
 using MyUniversityAPP.Models.DTO;
@@ -16,19 +18,32 @@ namespace MyUniversityAPP.Controllers
     {
 
         private readonly ApplicationDbContext _dbContext;
+        private readonly TelemetryClient _telemetryClient;
 
-        public AlunoController(ApplicationDbContext context)
+        public AlunoController(ApplicationDbContext context, TelemetryClient telemetryClient)
         {
             _dbContext = context;
+            _telemetryClient = telemetryClient;
         }
 
         [HttpGet]
         public ActionResult Get()
         {
-            var alunos = _dbContext.Alunos.Include(a => a.Matriculas).ToList();
+            try
+            {
+                var alunos = _dbContext.Alunos.Include(a => a.Matriculas).ToList();
 
-            return CreatedAtAction(nameof(Get), new ApiResponse<List<Aluno>>(true, "Cursos encontrados", alunos));
+                return CreatedAtAction(nameof(Get), new ApiResponse<List<Aluno>>(true, "Cursos encontrados", alunos));
+            }
+
+
+            catch (Exception ex)
+            {
+                _telemetryClient.TrackException(ex);
+                return StatusCode(500, new { message = "Ocorreu um erro ao processar sua solicitação.", details = ex.Message });
+            }
         }
+
 
         [HttpPost("create")]
         public async Task<ActionResult> Create([FromBody] Aluno aluno)
