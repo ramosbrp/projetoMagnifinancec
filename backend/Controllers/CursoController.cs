@@ -1,11 +1,10 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Microsoft.Identity.Client;
+using Microsoft.EntityFrameworkCore;
 using MyUniversityAPP.Data;
 using MyUniversityAPP.Models;
 using MyUniversityAPP.Models.DTO;
 using System.Drawing.Text;
 using System.Text.Json;
-using Microsoft.EntityFrameworkCore;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -30,47 +29,61 @@ namespace MyUniversityAPP.Controllers
         {
             try
             {
-                // Tente buscar o primeiro registro de uma tabela de forma síncrona
-                var item = await _dbContext.Usuario.FirstOrDefaultAsync();  // Substitua "MinhaTabela" pelo nome real da sua tabela
-                if (item != null)
+
+                List<Curso> cursos = new List<Curso>();
+                cursos = await _dbContext.Cursos.ToListAsync();
+
+                List<CursoDto> cursoDtos = new List<CursoDto>();
+
+                cursoDtos = cursos.Select(c => new CursoDto
                 {
-                    return Ok("Conexão com o banco de dados foi um sucesso!");
+                    Id = c.Id,
+                    Nome = c.Nome,
+                    Disciplinas = c.Disciplinas.Select(p => new
+                    DisciplinaDto
+                    {
+                        Id = p.Id,
+                        Nome = p.Nome,
+                    }
+
+                    ).ToList()
+                }).ToList();
+
+
+                return CreatedAtAction(nameof(Create), new ApiResponse<List<CursoDto>>(true, "Cursos encontrados", cursoDtos));
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, new ApiResponse<string>(false, "Erro ao buscar cursos", ex.Message));
+            }
+        }
+
+        [HttpPost]
+        public async Task<ActionResult> Create(Curso curso)
+        {
+            try
+            {
+                if (ModelState.IsValid)
+                {
+
+                    _dbContext.Cursos.Add(curso);
+                    await _dbContext.SaveChangesAsync();
+
+                    return CreatedAtAction(nameof(Create), new { id = curso.Id }, curso);
+
                 }
                 else
                 {
-                    return Ok("Conexão estabelecida, mas a tabela está vazia.");
+                    var message = "";
+                    return StatusCode(500, new ApiResponse<string>(false, "Dados de entrada inválidos.", message));
+
                 }
             }
             catch (Exception ex)
             {
-                return StatusCode(500, $"Erro ao conectar ao banco de dados: {ex.Message}");
+                return StatusCode(500, new { error = "Ocorreu um erro ao processar sua solicitação.." });
             }
         }
 
-
-        // GET api/<ValuesController>/5
-        [HttpGet("{id}")]
-        public string Get(int id)
-        {
-            return "value";
-        }
-
-        // POST api/<ValuesController>
-        [HttpPost]
-        public void Post([FromBody] string value)
-        {
-        }
-
-        // PUT api/<ValuesController>/5
-        [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
-        {
-        }
-
-        // DELETE api/<ValuesController>/5
-        [HttpDelete("{id}")]
-        public void Delete(int id)
-        {
-        }
     }
 }
