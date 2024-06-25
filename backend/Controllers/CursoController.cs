@@ -58,7 +58,7 @@ namespace MyUniversityAPP.Controllers
             }
         }
 
-        [HttpPost]
+        [HttpPost("create")]
         public async Task<ActionResult> Create(Curso curso)
         {
             try

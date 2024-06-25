@@ -31,10 +31,10 @@ namespace MyUniversityAPP.Controllers
             var disciplinas = _dbContext.Disciplinas.Include(a => a.Matriculas).ToList();
 
             // Retorna a lista como JSON
-            return CreatedAtAction(nameof(Get), new ApiResponse<List<Disciplina>>(true, "Cursos encontrados", disciplinas));
+            return CreatedAtAction(nameof(Get), new ApiResponse<List<Disciplina>>(true, "Disciplinas encontrados", disciplinas));
         }
 
-        [HttpPost]
+        [HttpPost("create")]
         public async Task<ActionResult> Create(Disciplina disciplina)
         {
             try

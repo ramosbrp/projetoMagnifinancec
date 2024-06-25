@@ -1,5 +1,6 @@
 using MyUniversityAPP.Data;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Diagnostics;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -24,10 +25,31 @@ if (!app.Environment.IsDevelopment())
     app.UseHsts();
 }
 
+app.UseExceptionHandler(errorApp =>
+{
+    errorApp.Run(async context =>
+    {
+        context.Response.StatusCode = 500;
+        context.Response.ContentType = "text/plain";
+
+        var exceptionHandlerPathFeature = context.Features.Get<IExceptionHandlerPathFeature>();
+        if (exceptionHandlerPathFeature?.Error != null)
+        {
+            // Log the exception
+            var logger = context.RequestServices.GetRequiredService<ILogger<Program>>();
+            logger.LogError(exceptionHandlerPathFeature.Error, "Unhandled exception");
+
+            await context.Response.WriteAsync("An unexpected error occurred!");
+        }
+    });
+});
+
 app.UseHttpsRedirection();
 app.UseStaticFiles(); // Para servir os arquivos estáticos do Angular.
 
+
 app.UseRouting(); // Configura o roteamento.
+
 
 app.UseAuthorization();
 
