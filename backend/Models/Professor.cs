@@ -6,8 +6,15 @@
         public string Nome { get; set; }
         public DateTime DataNascimento { get; set; }
         public decimal Salario { get; set; }
-        // Supondo que um professor pode lecionar várias disciplinas
         public virtual List<Disciplina> Disciplinas { get; set; } = new List<Disciplina>();
+
+        public Professor()
+        {
+            Nome = string.Empty;
+            DataNascimento = DateTime.MinValue;
+            Salario = 0;
+            Disciplinas = new List<Disciplina>(); 
+        }
 
     }
 }

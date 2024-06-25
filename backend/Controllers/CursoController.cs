@@ -81,7 +81,7 @@ namespace MyUniversityAPP.Controllers
             }
             catch (Exception ex)
             {
-                return StatusCode(500, new { error = "Ocorreu um erro ao processar sua solicitação.." });
+                return StatusCode(500, new { error = "Ocorreu um erro ao processar sua solicitação..", ex.Message });
             }
         }
 

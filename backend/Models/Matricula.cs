@@ -8,5 +8,11 @@
         public decimal Nota { get; set; }
         public virtual Aluno Aluno { get; set; }
         public virtual Disciplina Disciplina { get; set; }
+
+        public Matricula()
+        {
+            Aluno = new Aluno();
+            Disciplina = new Disciplina();
+        }
     }
 }

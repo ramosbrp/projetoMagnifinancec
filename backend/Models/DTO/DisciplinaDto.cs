@@ -6,5 +6,11 @@
         public string Nome { get; set; }
         public List<Matricula> Matriculas { get; set; }
 
+        public DisciplinaDto()
+        {
+            Nome = string.Empty;
+            Matriculas = new List<Matricula>();
+        }
+
     }
 }
