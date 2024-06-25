@@ -22,9 +22,7 @@ namespace MyUniversityAPP.Controllers
             _dbContext = context;
         }
 
-        // GET: api/<ValuesController>
         [HttpGet]
-
         public async Task<ActionResult> Get()
         {
             List<Professor> professores = new List<Professor>();
@@ -47,9 +45,10 @@ namespace MyUniversityAPP.Controllers
             return CreatedAtAction(nameof(Get), new ApiResponse<List<Professor>>(true, "Cursos encontrados", professores));
         }
 
-        [HttpPost]
-        public async Task<ActionResult> Create(Professor professor)
+        [HttpPost("create")]
+        public async Task<ActionResult> Create([FromBody] Professor professor)
         {
+            //var professor = new Professor();
             try
             {
                 if (ModelState.IsValid)

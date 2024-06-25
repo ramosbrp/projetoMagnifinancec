@@ -27,9 +27,7 @@ export class AlunoFormComponent  {
       if (this.alunoForm.valid) {
         this.alunoService.createAluno(this.alunoForm.value).subscribe({
           next: (aluno: Aluno) => {
-            this.alunoCadastrado = aluno; // Armazena o aluno retornado pelo servidor
-            // Se desejar, aqui você pode redirecionar o usuário para outra página
-            // ou limpar o formulário para nova entrada
+            this.alunoCadastrado = aluno; 
           },
           error: (erro) => {
             console.error('Erro ao cadastrar o aluno:', erro);

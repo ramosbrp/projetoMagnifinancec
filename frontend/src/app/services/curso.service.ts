@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
-import { catchError, retry , tap, map} from 'rxjs/operators';
+import { catchError, retry, tap, map } from 'rxjs/operators';
 import { Curso } from '../models/curso.model'; // Caminho do modelo Aluno
 import { environment } from 'src/environment/environment';
 
@@ -20,19 +20,21 @@ export class CursoService {
 
   //Get
   getCursos(): Observable<Curso[]> {
-    return this.http.get<{Success: boolean, Message: string, Data: Curso[]}>(`${this.apiUrlProd}`, this.httpOptions)
+    return this.http.get<{ Success: boolean, Message: string, Data: Curso[] }>(`${this.apiUrlProd}`, this.httpOptions)
       .pipe(
-        tap(response => console.log(response.Data)),
-        map(response => response.Data),
+        // tap(response => console.log(response.Data)),
         retry(2),
-        catchError(this.handleError) 
+        map(response => response.Data),
+        catchError(this.handleError)
       );
   }
 
   //Create
   createCurso(curso: Curso): Observable<Curso> {
-    return this.http.post<Curso>(`${this.apiUrlProd}/create`, curso, this.httpOptions)
+    console.log(curso)
+    return this.http.post<{ Success: boolean, Message: string, Data: Curso }>(`${this.apiUrlProd}/create`, curso, this.httpOptions)
       .pipe(
+        map(response => response.Data),
         catchError(this.handleError)
       );
   }

@@ -6,7 +6,7 @@
     </div>
 
     <div formArrayName="disciplinas">
-<<<<<<< HEAD
+      <!-- <<<<<<< HEAD
       <div *ngFor="let disciplina of disciplinas.controls; let i=index" [formGroupName]="i">
         <label for="nome">Nome da Disciplina:</label>
         <input type="text" id="nome" formControlName="nome" required>
@@ -16,12 +16,11 @@
           <option *ngFor="let professor of professores" [ngValue]="professor.ProfessorId"  >
             {{ professor.Nome }}
           </option>
-        </select>
-        
-=======
+        </select> -->
+
       <div id="disciplina" class="" *ngFor="let disciplina of disciplinas.controls; let i=index" [formGroupName]="i">
         <div class="">
-          <input type="text" id="nome" formControlName="nome" class="" placeholder="Nome da Disciplina" >
+          <input type="text" id="nome" formControlName="nome" class="" placeholder="Nome da Disciplina">
 
           <select formControlName="professorId" class="form-select">
             <option [ngValue]="null">Selecione</option>
@@ -31,7 +30,6 @@
           </select>
         </div>
 
->>>>>>> a717bfe04f20b755f557bb0b78958567251cc8b9
         <button type="button" (click)="removerDisciplina(i)">Remover Disciplina</button>
       </div>
     </div>

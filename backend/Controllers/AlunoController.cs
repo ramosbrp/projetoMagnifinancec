@@ -22,21 +22,18 @@ namespace MyUniversityAPP.Controllers
             _dbContext = context;
         }
 
-        // GET: api/<ValuesController>
         [HttpGet]
-
         public ActionResult Get()
         {
-            //Inclui as Matriculas relacionadas com cada Aluno
             var alunos = _dbContext.Alunos.Include(a => a.Matriculas).ToList();
 
-            // Retorna a lista como JSON
             return CreatedAtAction(nameof(Get), new ApiResponse<List<Aluno>>(true, "Cursos encontrados", alunos));
         }
 
-        [HttpPost]
-        public async Task<ActionResult> Create(Aluno aluno)
+        [HttpPost("create")]
+        public async Task<ActionResult> Create([FromBody] Aluno aluno)
         {
+            //var aluno = new Aluno();
             try
             {
                 if (ModelState.IsValid)

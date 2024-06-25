@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
-import { catchError, retry } from 'rxjs/operators';
+import { catchError, retry, tap, map } from 'rxjs/operators';
 import { Professor } from '../models/professor.model'; // Substitua pelo caminho correto para o modelo Professor
 import { environment } from 'src/environment/environment';
 
@@ -10,19 +10,21 @@ import { environment } from 'src/environment/environment';
 })
 export class ProfessorService {
   // private apiUrl = `${environment.apiUrl}/professor`; 
-  private apiUrlProd = `api/curso`;
+  private apiUrlProd = `api/professor`;
 
   httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })
   };
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) { }
 
   // Buscar todos os professores
   getProfessores(): Observable<Professor[]> {
-    return this.http.get<Professor[]>(this.apiUrlProd, this.httpOptions)
+    return this.http.get<{ Success: boolean, Message: string, Data: Professor[] }>(`${this.apiUrlProd}`, this.httpOptions)
       .pipe(
+        tap(response => console.log(response)),
         retry(2),
+        map(response => response.Data),
         catchError(this.handleError)
       );
   }
@@ -38,8 +40,10 @@ export class ProfessorService {
 
   // Criar um novo professor
   createProfessor(professor: Professor): Observable<Professor> {
-    return this.http.post<Professor>(`${this.apiUrlProd}/create`, professor, this.httpOptions)
+    return this.http.post<{ Success: boolean, Message: string, Data: Professor }>(`${this.apiUrlProd}/create`, professor, this.httpOptions)
       .pipe(
+        retry(2),
+        map(response => response.Data),
         catchError(this.handleError)
       );
   }
