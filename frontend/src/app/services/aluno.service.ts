@@ -9,7 +9,9 @@ import { environment } from 'src/environment/environment';
   providedIn: 'root'
 })
 export class AlunoService {
-  private apiUrl = `${environment.apiUrl}/aluno`;
+  // private apiUrl = `${environment.apiUrl}/aluno`;
+
+  private apiUrlProd = `api/curso`;
 
   httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })
@@ -19,7 +21,7 @@ export class AlunoService {
 
   //Get
   getAlunos(): Observable<Aluno[]> {
-    return this.http.get<Aluno[]>(this.apiUrl, this.httpOptions)
+    return this.http.get<Aluno[]>(this.apiUrlProd, this.httpOptions)
     .pipe(
         retry(2), // Tenta a chamada novamente se falhar
         catchError(this.handleError) // Trata erros em caso de falha
@@ -28,7 +30,7 @@ export class AlunoService {
 
   //Create
   createAluno(aluno: Aluno): Observable<Aluno> {
-    return this.http.post<Aluno>(`${this.apiUrl}/create`, aluno, this.httpOptions)
+    return this.http.post<Aluno>(`${this.apiUrlProd}/create`, aluno, this.httpOptions)
       .pipe(
         catchError(this.handleError)
       );

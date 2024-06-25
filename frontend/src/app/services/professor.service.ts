@@ -9,7 +9,8 @@ import { environment } from 'src/environment/environment';
   providedIn: 'root'
 })
 export class ProfessorService {
-  private apiUrl = `${environment.apiUrl}/professor`; // Substitua pela URL correta da API
+  // private apiUrl = `${environment.apiUrl}/professor`; 
+  private apiUrlProd = `api/curso`;
 
   httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })
@@ -19,7 +20,7 @@ export class ProfessorService {
 
   // Buscar todos os professores
   getProfessores(): Observable<Professor[]> {
-    return this.http.get<Professor[]>(this.apiUrl, this.httpOptions)
+    return this.http.get<Professor[]>(this.apiUrlProd, this.httpOptions)
       .pipe(
         retry(2),
         catchError(this.handleError)
@@ -28,7 +29,7 @@ export class ProfessorService {
 
   // Buscar um professor pelo ID
   getProfessorById(id: number): Observable<Professor> {
-    const url = `${this.apiUrl}/${id}`;
+    const url = `${this.apiUrlProd}/${id}`;
     return this.http.get<Professor>(url, this.httpOptions)
       .pipe(
         catchError(this.handleError)
@@ -37,7 +38,7 @@ export class ProfessorService {
 
   // Criar um novo professor
   createProfessor(professor: Professor): Observable<Professor> {
-    return this.http.post<Professor>(`${this.apiUrl}/create`, professor, this.httpOptions)
+    return this.http.post<Professor>(`${this.apiUrlProd}/create`, professor, this.httpOptions)
       .pipe(
         catchError(this.handleError)
       );
@@ -45,7 +46,7 @@ export class ProfessorService {
 
   // Atualizar um professor
   updateProfessor(id: number, professor: Professor): Observable<any> {
-    const url = `${this.apiUrl}/${id}`;
+    const url = `${this.apiUrlProd}/${id}`;
     return this.http.put(url, professor, this.httpOptions)
       .pipe(
         catchError(this.handleError)
@@ -54,7 +55,7 @@ export class ProfessorService {
 
   // Deletar um professor
   deleteProfessor(id: number): Observable<Professor> {
-    const url = `${this.apiUrl}/${id}`;
+    const url = `${this.apiUrlProd}/${id}`;
     return this.http.delete<Professor>(url, this.httpOptions)
       .pipe(
         catchError(this.handleError)

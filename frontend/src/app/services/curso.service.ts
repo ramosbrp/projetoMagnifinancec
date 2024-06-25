@@ -9,7 +9,7 @@ import { environment } from 'src/environment/environment';
   providedIn: 'root'
 })
 export class CursoService {
-  private apiUrl = `${environment.apiUrl}/curso`;
+  // private apiUrl = `${environment.apiUrl}/curso`;
   private apiUrlProd = `api/curso`;
 
   httpOptions = {
@@ -31,7 +31,7 @@ export class CursoService {
 
   //Create
   createCurso(curso: Curso): Observable<Curso> {
-    return this.http.post<Curso>(`${this.apiUrl}/create`, curso, this.httpOptions)
+    return this.http.post<Curso>(`${this.apiUrlProd}/create`, curso, this.httpOptions)
       .pipe(
         catchError(this.handleError)
       );
