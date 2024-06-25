@@ -58,7 +58,7 @@ namespace MyUniversityAPP.Controllers
             }
             catch (Exception ex)
             {
-                return StatusCode(500, new ApiResponse<string>(false, "Dados de entrada inválidos.", ex.Message));
+                return StatusCode(500, new ApiResponse<string>(false, "Ocorreu um erro ao processar sua solicitação..", ex.Message));
             }
         }
 
