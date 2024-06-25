@@ -1,9 +1,11 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.Identity.Client;
 using MyUniversityAPP.Data;
 using MyUniversityAPP.Models;
 using MyUniversityAPP.Models.DTO;
 using System.Drawing.Text;
 using System.Text.Json;
+using Microsoft.EntityFrameworkCore;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -24,26 +26,24 @@ namespace MyUniversityAPP.Controllers
         // GET: api/<ValuesController>
         [HttpGet]
 
-       public async Task<ActionResult> Get()
+        public async Task<ActionResult> Get()
         {
             try
             {
-                List<CursoDto> cursos = new List<CursoDto>();
-
-                CursoDto curso = new CursoDto
+                // Tente buscar o primeiro registro de uma tabela de forma síncrona
+                var item = await _dbContext.Usuario.FirstOrDefaultAsync();  // Substitua "MinhaTabela" pelo nome real da sua tabela
+                if (item != null)
                 {
-                    Id = 1,
-                    Nome = "Física"
-                };
-
-                cursos.Add(curso);
-
-                // Note que o tipo genérico agora é List<CursoDto> ao invés de CursoDto
-                return Ok(new ApiResponse<List<CursoDto>>(true, "Cursos encontrados", cursos));
+                    return Ok("Conexão com o banco de dados foi um sucesso!");
+                }
+                else
+                {
+                    return Ok("Conexão estabelecida, mas a tabela está vazia.");
+                }
             }
             catch (Exception ex)
             {
-                return NotFound(new ApiResponse<string>(false, "Erro ao buscar cursos", ex.Message));
+                return StatusCode(500, $"Erro ao conectar ao banco de dados: {ex.Message}");
             }
         }
 

@@ -19,5 +19,7 @@ namespace MyUniversityAPP.Data
         public DbSet<Professor> Professors { get; set; }
         public DbSet<Disciplina> Disciplinas { get; set; }
 
+        public DbSet<Usuario> Usuario{ get; set; }
+
     }
 }
