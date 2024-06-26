@@ -4,8 +4,10 @@ using Microsoft.AspNetCore.Diagnostics;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Adicionar Application Insights
-builder.Services.AddApplicationInsightsTelemetry(builder.Configuration["ApplicationInsights:InstrumentationKey"]);
+// Configuração do Application Insights
+string telemetryKey = builder.Environment.IsDevelopment()
+    ? builder.Configuration["ApplicationInsights:InstrumentationKey"] // Para desenvolvimento
+    : Environment.GetEnvironmentVariable("APPINSIGHTS_INSTRUMENTATIONKEY"); // Para produção
 
 builder.Services.AddControllers().AddJsonOptions(options =>
 {
@@ -20,6 +22,7 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
 );
 
 var app = builder.Build();
+
 
 // Configurar o pipeline de requisição HTTP.
 if (!app.Environment.IsDevelopment())
