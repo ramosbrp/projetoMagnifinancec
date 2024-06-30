@@ -9,6 +9,8 @@ string telemetryKey = builder.Environment.IsDevelopment()
     ? builder.Configuration["ApplicationInsights:InstrumentationKey"] // Para desenvolvimento
     : Environment.GetEnvironmentVariable("APPINSIGHTS_INSTRUMENTATIONKEY"); // Para produção
 
+builder.Services.AddApplicationInsightsTelemetry(telemetryKey);
+
 builder.Services.AddControllers().AddJsonOptions(options =>
 {
     options.JsonSerializerOptions.PropertyNamingPolicy = null; // Mantém PascalCase
