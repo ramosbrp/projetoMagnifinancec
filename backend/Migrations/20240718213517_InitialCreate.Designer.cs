@@ -12,8 +12,8 @@ using MyUniversityAPP.Data;
 namespace MyUniversityAPP.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20240625212514_AjustesGeraisNasClassesParaRemoverWarnings")]
-    partial class AjustesGeraisNasClassesParaRemoverWarnings
+    [Migration("20240718213517_InitialCreate")]
+    partial class InitialCreate
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -37,9 +37,11 @@ namespace MyUniversityAPP.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Nome")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("NumeroMatricula")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");

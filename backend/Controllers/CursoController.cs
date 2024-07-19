@@ -59,12 +59,48 @@ namespace MyUniversityAPP.Controllers
         }
 
         [HttpPost("create")]
-        public async Task<ActionResult> Create(Curso curso)
+        public async Task<ActionResult> Create(CursoDto cursoDto)
         {
             try
             {
                 if (ModelState.IsValid)
                 {
+                    List<Disciplina> disciplinas = new List<Disciplina>();
+                    if (cursoDto.Disciplinas != null)
+                    {
+
+                        foreach (var item in cursoDto.Disciplinas)
+                        {
+                            Disciplina disciplina = new Disciplina
+                            {
+                                Nome = item.Nome,
+                                CursoId = item.Id,
+                                ProfessorId = item.ProfessorId,
+                            };
+
+                            Professor professor = new Professor();
+                            professor = await _dbContext.Professors.FirstOrDefaultAsync(x => x.Id == disciplina.ProfessorId);
+
+                            if (professor != null)
+                            {
+                                disciplina.ProfessorId = professor.Id;
+                            }
+                            else
+                            {
+                                disciplina.Professor = null;
+                            }
+
+                            disciplinas.Add(disciplina);
+                        };
+
+                    }
+
+                    Curso curso = new Curso
+                    {
+                        Nome = cursoDto.Nome,
+                        Disciplinas = disciplinas
+                    };
+
 
                     _dbContext.Cursos.Add(curso);
                     await _dbContext.SaveChangesAsync();
@@ -86,4 +122,5 @@ namespace MyUniversityAPP.Controllers
         }
 
     }
+
 }

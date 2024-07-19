@@ -30,3 +30,4 @@ packages/
 *.mdf
 *.ldf
 /backend/appsettings.json
+/git-filter-repo

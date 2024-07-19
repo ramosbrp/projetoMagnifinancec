@@ -12,8 +12,8 @@ using MyUniversityAPP.Data;
 namespace MyUniversityAPP.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20240625225539_AjustesGerais")]
-    partial class AjustesGerais
+    [Migration("20240719142946_TornandoProfessorIdOpcional")]
+    partial class TornandoProfessorIdOpcional
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

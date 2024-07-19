@@ -12,8 +12,8 @@ using MyUniversityAPP.Data;
 namespace MyUniversityAPP.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20240625012959_InitialCreate")]
-    partial class InitialCreate
+    [Migration("20240718235612_PermitindoProfessorNull")]
+    partial class PermitindoProfessorNull
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -75,9 +75,6 @@ namespace MyUniversityAPP.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<int>("CursoId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("MyProperty")
                         .HasColumnType("int");
 
                     b.Property<string>("Nome")

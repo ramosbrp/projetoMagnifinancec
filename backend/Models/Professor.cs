@@ -10,7 +10,7 @@
 
         public Professor()
         {
-            Nome = string.Empty;
+            Nome = "";
             DataNascimento = DateTime.MinValue;
             Salario = 0;
             Disciplinas = new List<Disciplina>(); 

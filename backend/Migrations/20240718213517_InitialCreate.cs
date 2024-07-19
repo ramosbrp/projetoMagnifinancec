@@ -75,8 +75,7 @@ namespace MyUniversityAPP.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Nome = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     CursoId = table.Column<int>(type: "int", nullable: false),
-                    ProfessorId = table.Column<int>(type: "int", nullable: true),
-                    MyProperty = table.Column<int>(type: "int", nullable: false)
+                    ProfessorId = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
                 {
