@@ -56,4 +56,4 @@ jobs:
           app-name: 'MyUniversity-App'
           slot-name: 'Production'
           package: .
-          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_01C9E94C24AE43FBB8FC60A723D39422 }}
+          publish-profile: ${{ secrets.AzureAppService_PublishProfile_61f2c64cfec24b90aa5864611543a3d2 }}
