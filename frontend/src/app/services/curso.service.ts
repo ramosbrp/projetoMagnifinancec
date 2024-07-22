@@ -4,6 +4,7 @@ import { Observable, throwError } from 'rxjs';
 import { catchError, retry, tap, map } from 'rxjs/operators';
 import { Curso } from '../models/curso.model'; // Caminho do modelo Aluno
 import { environment } from 'src/environment/environment';
+import { ApiResponse } from '../models/api-response.model';
 
 @Injectable({
   providedIn: 'root'
@@ -20,7 +21,7 @@ export class CursoService {
 
   //Get
   getCursos(): Observable<Curso[]> {
-    return this.http.get<{ Success: boolean, Message: string, Data: Curso[] }>(`${this.apiUrlProd}`, this.httpOptions)
+    return this.http.get<ApiResponse<Curso[]>>(`${this.apiUrlProd}`, this.httpOptions)
       .pipe(
         // tap(response => console.log(response.Data)),
         retry(2),
@@ -31,11 +32,28 @@ export class CursoService {
 
   //Create
   createCurso(curso: Curso): Observable<Curso> {
-    console.log(curso)
-    return this.http.post<{ Success: boolean, Message: string, Data: Curso }>(`${this.apiUrlProd}/create`, curso, this.httpOptions)
+    return this.http.post<ApiResponse<Curso>>(`${this.apiUrlProd}/create`, curso, this.httpOptions)
       .pipe(
+        tap(response => console.log(response.Data)),
+        tap(response => {
+          if (!response.Success) {
+            console.error('Erro no servidor:', response.Message);
+          }
+        }),
         map(response => response.Data),
-        catchError(this.handleError)
+        catchError(error => {
+          console.error('Erro na comunicação com o servidor:', error);
+          console.error('Detalhes do erro:', error.message);
+          if (error.error instanceof ErrorEvent) {
+            // Erro do lado do cliente ou problema de rede
+            console.error('Erro do lado do cliente:', error.error.message);
+          } else {
+            // O backend retornou um código de resposta de falha
+            // A resposta pode conter alguma pista
+            console.error(`Backend retornou código ${error.status}, `, `corpo era: `, error.error);
+          }
+          return throwError(() => new Error('Falha na comunicação com o servidor'));
+        })
       );
   }
 

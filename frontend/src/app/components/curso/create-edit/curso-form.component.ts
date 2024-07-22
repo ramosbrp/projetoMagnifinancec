@@ -76,7 +76,6 @@ export class CursoFormComponent implements OnInit {
     
     onSubmit(): void {
       if (this.cursoForm.valid) {
-        console.log(this.cursoForm)
         this.cursoService.createCurso(this.cursoForm.value).subscribe(
           // Trate a resposta aqui
         );

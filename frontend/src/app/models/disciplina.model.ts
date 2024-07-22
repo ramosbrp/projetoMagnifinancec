@@ -8,6 +8,7 @@ export class Disciplina{
         Nome!: string;
         CursoId!: number;
         Curso!: Curso;
-        Professor!: Professor;
+        Professor?: Professor;
+        ProfessorId?: number;  
         Matriculas?: Matricula[];
 }

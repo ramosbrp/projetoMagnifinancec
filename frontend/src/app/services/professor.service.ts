@@ -19,10 +19,10 @@ export class ProfessorService {
   constructor(private http: HttpClient) { }
 
   // Buscar todos os professores
-  getProfessores(): Observable<Professor[]> {
+    getProfessores(): Observable<Professor[]> {
     return this.http.get<{ Success: boolean, Message: string, Data: Professor[] }>(`${this.apiUrlProd}`, this.httpOptions)
       .pipe(
-        tap(response => console.log(response)),
+        // tap(response => console.log(response)),
         retry(2),
         map(response => response.Data),
         catchError(this.handleError)

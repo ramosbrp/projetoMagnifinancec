@@ -44,13 +44,13 @@ namespace MyUniversityAPP.Controllers
                     {
                         Id = p.Id,
                         Nome = p.Nome,
-                    }
+                    }   
 
                     ).ToList()
                 }).ToList();
 
 
-                return CreatedAtAction(nameof(Create), new ApiResponse<List<CursoDto>>(true, "Cursos encontrados", cursoDtos));
+                return Ok(new ApiResponse<List<CursoDto>>(true, "Cursos encontrados", cursoDtos));
             }
             catch (Exception ex)
             {
@@ -105,7 +105,7 @@ namespace MyUniversityAPP.Controllers
                     _dbContext.Cursos.Add(curso);
                     await _dbContext.SaveChangesAsync();
 
-                    return CreatedAtAction(nameof(Create), new { id = curso.Id }, curso);
+                    return Ok(new ApiResponse<Curso>(true, "Curso cadastrado com sucesso", curso));
 
                 }
                 else
