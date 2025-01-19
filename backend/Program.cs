@@ -2,6 +2,7 @@ using MyUniversityAPP.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Diagnostics;
 
+// WebApplicationBuilder
 var builder = WebApplication.CreateBuilder(args);
 
 // Configuração do Application Insights
@@ -24,6 +25,7 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options.UseSqlServer(connectionString)
 );
 
+// WebApplication
 var app = builder.Build();
 
 

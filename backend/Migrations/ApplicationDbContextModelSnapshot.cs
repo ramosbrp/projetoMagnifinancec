@@ -17,6 +17,7 @@ namespace MyUniversityAPP.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
+                .HasDefaultSchema("MyUniversity")
                 .HasAnnotation("ProductVersion", "8.0.6")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
@@ -43,7 +44,7 @@ namespace MyUniversityAPP.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Alunos");
+                    b.ToTable("Alunos", "MyUniversity");
                 });
 
             modelBuilder.Entity("MyUniversityAPP.Models.Curso", b =>
@@ -60,7 +61,7 @@ namespace MyUniversityAPP.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Cursos");
+                    b.ToTable("Cursos", "MyUniversity");
                 });
 
             modelBuilder.Entity("MyUniversityAPP.Models.Disciplina", b =>
@@ -87,7 +88,7 @@ namespace MyUniversityAPP.Migrations
 
                     b.HasIndex("ProfessorId");
 
-                    b.ToTable("Disciplinas");
+                    b.ToTable("Disciplinas", "MyUniversity");
                 });
 
             modelBuilder.Entity("MyUniversityAPP.Models.Matricula", b =>
@@ -105,6 +106,7 @@ namespace MyUniversityAPP.Migrations
                         .HasColumnType("int");
 
                     b.Property<decimal>("Nota")
+                        .HasPrecision(18, 2)
                         .HasColumnType("decimal(18,2)");
 
                     b.HasKey("Id");
@@ -113,7 +115,7 @@ namespace MyUniversityAPP.Migrations
 
                     b.HasIndex("DisciplinaId");
 
-                    b.ToTable("Matriculas");
+                    b.ToTable("Matriculas", "MyUniversity");
                 });
 
             modelBuilder.Entity("MyUniversityAPP.Models.Professor", b =>
@@ -132,11 +134,12 @@ namespace MyUniversityAPP.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<decimal>("Salario")
+                        .HasPrecision(18, 2)
                         .HasColumnType("decimal(18,2)");
 
                     b.HasKey("Id");
 
-                    b.ToTable("Professors");
+                    b.ToTable("Professores", "MyUniversity");
                 });
 
             modelBuilder.Entity("MyUniversityAPP.Models.Usuario", b =>
@@ -153,7 +156,7 @@ namespace MyUniversityAPP.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Usuario");
+                    b.ToTable("Usuarios", "MyUniversity");
                 });
 
             modelBuilder.Entity("MyUniversityAPP.Models.Disciplina", b =>
